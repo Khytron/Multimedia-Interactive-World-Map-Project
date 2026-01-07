@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive World Map: Culture & History</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="globe-icon">🌍</div>
+            <h2>Exploring History...</h2>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="header-content">
+            <h1 class="logo">🌍 World Map: Culture & History</h1>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-view="world">World View</button>
+                <button class="nav-btn" data-view="asia">Asia</button>
+                <button class="nav-btn" data-view="middle-east">Middle East</button>
+                <button class="nav-btn" data-view="europe">Europe</button>
+                <button class="nav-btn" data-view="africa">Africa</button>
+                <button class="nav-btn" data-view="australia">Oceania</button>
+            </nav>
+            <button id="info-btn" class="info-button" title="About this project">ℹ️</button>
+        </div>
+    </header>
+
+    <!-- Timeline Slider -->
+    <div id="timeline-container">
+        <div class="timeline-wrapper">
+            <span class="era-label" id="era-label">Ancient Era</span>
+            <div class="timeline-slider-container">
+                <input type="range" id="year-slider" min="-3000" max="2025" value="1500" step="1">
+                <div class="timeline-marks">
+                    <span data-year="-3000">3000 BCE</span>
+                    <span data-year="-1000">1000 BCE</span>
+                    <span data-year="0">1 CE</span>
+                    <span data-year="500">500</span>
+                    <span data-year="1000">1000</span>
+                    <span data-year="1500">1500</span>
+                    <span data-year="2000">2000</span>
+                </div>
+            </div>
+            <div class="year-display">
+                <span id="current-year">1500 CE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Map Container -->
+    <main id="map-container">
+        <svg id="world-map" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+            <!-- World Map Paths will be loaded here -->
+        </svg>
+        
+        <!-- Region Overlays with Cultural Markers -->
+        <div id="markers-container"></div>
+        
+        <!-- Zoom Controls -->
+        <div class="map-controls">
+            <button id="zoom-in" class="control-btn">+</button>
+            <button id="zoom-out" class="control-btn">−</button>
+            <button id="reset-view" class="control-btn">⌂</button>
+        </div>
+    </main>
+
+    <!-- Info Panel (Right Side) -->
+    <aside id="info-panel" class="hidden">
+        <button id="close-panel" class="close-btn">×</button>
+        <div id="panel-content">
+            <h2 id="panel-title">Select a Region</h2>
+            <div id="panel-image"></div>
+            <p id="panel-description"></p>
+            <div id="panel-details"></div>
+        </div>
+    </aside>
+
+    <!-- Deep Dive Modal -->
+    <div id="modal-overlay" class="hidden">
+        <div id="modal-content">
+            <button id="close-modal" class="close-btn">×</button>
+            <div id="modal-header">
+                <h2 id="modal-title"></h2>
+                <span id="modal-era"></span>
+            </div>
+            <div id="modal-body">
+                <div id="modal-media"></div>
+                <div id="modal-text"></div>
+            </div>
+            <div id="modal-footer">
+                <button id="modal-prev" class="modal-nav-btn">← Previous</button>
+                <button id="modal-next" class="modal-nav-btn">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="hidden">
+        <div class="about-content">
+            <button id="close-about" class="close-btn">×</button>
+            <h2>About This Project</h2>
+            <p>The <strong>Interactive World Map: Culture & History</strong> is an educational tool designed to foster spatial-historical literacy across five key regions:</p>
+            <ul>
+                <li><strong>Asia</strong> - Explore the Silk Road and ancient dynasties</li>
+                <li><strong>Middle East</strong> - Discover the Islamic Golden Age</li>
+                <li><strong>Europe</strong> - Journey through the Renaissance</li>
+                <li><strong>Africa</strong> - Learn about pre-colonial empires</li>
+                <li><strong>Australia</strong> - Understand Indigenous history</li>
+            </ul>
+            <p>Use the timeline slider to travel through time from 3000 BCE to the present day. Click on cultural markers to explore detailed information about historical events, figures, and traditions.</p>
+            <div class="about-footer">
+                <p>© 2025 Interactive World Map Project</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements for Ambient Sound -->
+    <audio id="ambient-audio" loop>
+        <source src="audio/ambient.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="data.js"></script>
+    <script src="map.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
