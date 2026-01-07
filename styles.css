@@ -24,6 +24,8 @@
     --europe-color: #3498DB;
     --africa-color: #27AE60;
     --australia-color: #9B59B6;
+    --north-america-color: #E67E22;
+    --south-america-color: #16A085;
     
     /* Typography */
     --font-heading: 'Cinzel', serif;
@@ -356,6 +358,18 @@ body {
 .region.australia { fill: #E8DAEF; }
 .region.australia:hover { fill: var(--australia-color); }
 .region.australia.active { fill: var(--australia-color); }
+
+.region.north-america { fill: #FDEBD0; }
+.region.north-america:hover { fill: var(--north-america-color); }
+.region.north-america.active { fill: var(--north-america-color); }
+
+.region.south-america { fill: #D1F2EB; }
+.region.south-america:hover { fill: var(--south-america-color); }
+.region.south-america.active { fill: var(--south-america-color); }
+
+.region.other { fill: #FDEBD0; }
+.region.other:hover { fill: var(--north-america-color); }
+.region.other.active { fill: var(--north-america-color); }
 
 .water {
     fill: var(--ocean);

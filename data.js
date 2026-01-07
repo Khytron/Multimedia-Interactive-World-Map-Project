@@ -5,6 +5,34 @@
 
 // Region data with historical information
 const regionsData = {
+    'north-america': {
+        id: 'north-america',
+        name: 'North America',
+        icon: '🦅',
+        color: '#E67E22',
+        description: 'North America is home to diverse Indigenous cultures that thrived for thousands of years before European contact. From the Maya and Aztec empires to the great mound-building cultures, the continent has a rich pre-Columbian history.',
+        keyFacts: [
+            { icon: '🏛️', text: 'Maya and Aztec civilizations' },
+            { icon: '🌽', text: 'Birthplace of corn cultivation' },
+            { icon: '🗽', text: 'Modern democracy and innovation' },
+            { icon: '🦬', text: 'Diverse Indigenous cultures' }
+        ],
+        viewBox: { x: 20, y: 30, width: 320, height: 280 }
+    },
+    'south-america': {
+        id: 'south-america',
+        name: 'South America',
+        icon: '🦜',
+        color: '#16A085',
+        description: 'South America was home to the mighty Inca Empire and numerous other advanced civilizations. The continent features incredible biodiversity and cultural heritage from the Andes to the Amazon.',
+        keyFacts: [
+            { icon: '🏔️', text: 'Inca Empire in the Andes' },
+            { icon: '🌳', text: 'Amazon rainforest biodiversity' },
+            { icon: '📿', text: 'Rich Indigenous traditions' },
+            { icon: '🎭', text: 'Vibrant cultural fusion' }
+        ],
+        viewBox: { x: 140, y: 270, width: 220, height: 350 }
+    },
     asia: {
         id: 'asia',
         name: 'Asia',
@@ -17,7 +45,7 @@ const regionsData = {
             { icon: '🛤️', text: 'Historic Silk Road trade routes' },
             { icon: '🏛️', text: 'Ancient civilizations: China, India, Mesopotamia' }
         ],
-        viewBox: { x: 650, y: 80, width: 450, height: 300 }
+        viewBox: { x: 550, y: 30, width: 500, height: 320 }
     },
     'middle-east': {
         id: 'middle-east',
@@ -31,7 +59,7 @@ const regionsData = {
             { icon: '🔬', text: 'Islamic Golden Age innovations' },
             { icon: '📚', text: 'House of Wisdom in Baghdad' }
         ],
-        viewBox: { x: 500, y: 150, width: 250, height: 200 }
+        viewBox: { x: 500, y: 150, width: 250, height: 220 }
     },
     europe: {
         id: 'europe',
@@ -45,7 +73,7 @@ const regionsData = {
             { icon: '⚙️', text: 'Industrial Revolution origins' },
             { icon: '🗺️', text: 'Age of Exploration' }
         ],
-        viewBox: { x: 400, y: 40, width: 250, height: 200 }
+        viewBox: { x: 380, y: 60, width: 220, height: 180 }
     },
     africa: {
         id: 'africa',
@@ -78,13 +106,37 @@ const regionsData = {
 };
 
 // Historical events data organized by era and region
-// Position coordinates are in SVG viewBox units (1200x600)
+// Position coordinates are percentages (0-100) that get converted to SVG coordinates
 const historicalEvents = {
     // Ancient Era (-3000 to -500)
     ancient: {
         era: 'Ancient Era',
         yearRange: [-3000, -500],
         events: [
+            {
+                id: 'olmec',
+                region: 'north-america',
+                title: 'Olmec Civilization',
+                year: -1500,
+                position: { x: 18, y: 42 },
+                icon: '🗿',
+                description: 'The Olmec civilization, often called the "mother culture" of Mesoamerica, created the first major civilization in Mexico.',
+                details: 'Famous for their colossal stone heads, the Olmec developed early forms of writing, the Mesoamerican calendar, and the ballgame that would spread throughout the region.',
+                keyFigures: ['Unknown rulers'],
+                culturalSignificance: 'Foundation of Mesoamerican civilization, influencing Maya and Aztec cultures.'
+            },
+            {
+                id: 'caral',
+                region: 'south-america',
+                title: 'Caral Civilization',
+                year: -2600,
+                position: { x: 22, y: 58 },
+                icon: '🏛️',
+                description: 'Caral in Peru is one of the oldest urban centers in the Americas, contemporary with Egyptian pyramids.',
+                details: 'The city featured pyramids, circular plazas, and complex irrigation systems. Remarkably, there is no evidence of warfare in this peaceful civilization.',
+                keyFigures: ['Unknown rulers'],
+                culturalSignificance: 'Earliest known civilization in the Americas, predating the Maya by millennia.'
+            },
             {
                 id: 'pyramids',
                 region: 'africa',
@@ -141,6 +193,42 @@ const historicalEvents = {
         era: 'Classical Era',
         yearRange: [-500, 500],
         events: [
+            {
+                id: 'maya-classic',
+                region: 'north-america',
+                title: 'Maya Civilization Rise',
+                year: -250,
+                position: { x: 19, y: 43 },
+                icon: '🏛️',
+                description: 'The Maya civilization entered its Classic period, building great cities like Tikal and developing advanced astronomy and mathematics.',
+                details: 'The Maya developed the most sophisticated writing system in pre-Columbian Americas, along with the concept of zero and accurate astronomical calendars.',
+                keyFigures: ['Various city-state rulers'],
+                culturalSignificance: 'Peak of Mesoamerican intellectual and artistic achievement.'
+            },
+            {
+                id: 'nazca-lines',
+                region: 'south-america',
+                title: 'Nazca Lines Created',
+                year: -100,
+                position: { x: 22, y: 62 },
+                icon: '🦅',
+                description: 'The Nazca people created enormous geoglyphs in the Peruvian desert, depicting animals and geometric shapes visible only from the air.',
+                details: 'Over 800 straight lines, 300 geometric figures, and 70 animal and plant designs were etched into the desert floor over centuries.',
+                keyFigures: ['Nazca culture'],
+                culturalSignificance: 'One of archaeology\'s greatest mysteries, possibly for astronomical or religious purposes.'
+            },
+            {
+                id: 'teotihuacan',
+                region: 'north-america',
+                title: 'Teotihuacan Peak',
+                year: 450,
+                position: { x: 17, y: 40 },
+                icon: '🔺',
+                description: 'Teotihuacan became the largest city in the pre-Columbian Americas with a population of over 100,000.',
+                details: 'The city featured the massive Pyramid of the Sun and Pyramid of the Moon, and influenced cultures throughout Mesoamerica.',
+                keyFigures: ['Unknown rulers'],
+                culturalSignificance: 'First true metropolis in the Americas, center of trade and religion.'
+            },
             {
                 id: 'greek-democracy',
                 region: 'europe',
@@ -209,6 +297,54 @@ const historicalEvents = {
         era: 'Medieval Era',
         yearRange: [500, 1500],
         events: [
+            {
+                id: 'maya-collapse',
+                region: 'north-america',
+                title: 'Maya Classic Collapse',
+                year: 900,
+                position: { x: 19, y: 43 },
+                icon: '🏚️',
+                description: 'The great Maya cities of the southern lowlands were abandoned in a mysterious collapse, though Maya civilization continued in the north.',
+                details: 'Theories include drought, warfare, and environmental degradation. Cities like Tikal were swallowed by jungle while Chichen Itza rose in the north.',
+                keyFigures: ['Various rulers'],
+                culturalSignificance: 'One of history\'s great archaeological mysteries.'
+            },
+            {
+                id: 'tiwanaku',
+                region: 'south-america',
+                title: 'Tiwanaku Empire',
+                year: 800,
+                position: { x: 24, y: 68 },
+                icon: '🗿',
+                description: 'The Tiwanaku civilization dominated the Lake Titicaca region with advanced agricultural terracing and monumental architecture.',
+                details: 'At 3,850 meters elevation, Tiwanaku developed raised-field agriculture and impressive stone monuments like the Gate of the Sun.',
+                keyFigures: ['Unknown rulers'],
+                culturalSignificance: 'Pre-Inca Andean civilization with lasting cultural influence.'
+            },
+            {
+                id: 'cahokia',
+                region: 'north-america',
+                title: 'Cahokia Mounds',
+                year: 1100,
+                position: { x: 20, y: 30 },
+                icon: '🏔️',
+                description: 'Cahokia near present-day St. Louis became the largest pre-Columbian settlement north of Mexico with over 20,000 inhabitants.',
+                details: 'Monks Mound, the largest earthwork in the Americas, covers 14 acres. The city was a major trade center connecting diverse North American cultures.',
+                keyFigures: ['Unknown rulers'],
+                culturalSignificance: 'Largest and most influential Mississippian culture site.'
+            },
+            {
+                id: 'chimu-empire',
+                region: 'south-america',
+                title: 'Chimú Empire',
+                year: 1300,
+                position: { x: 20, y: 60 },
+                icon: '🌊',
+                description: 'The Chimú built Chan Chan, the largest adobe city in the world, on Peru\'s northern coast.',
+                details: 'Chan Chan covered 20 square kilometers with elaborate palaces, gardens, and irrigation systems. The Chimú were master metalworkers.',
+                keyFigures: ['Tacaynamo dynasty'],
+                culturalSignificance: 'Second largest pre-Columbian empire in South America before the Inca.'
+            },
             {
                 id: 'islamic-golden-age',
                 region: 'middle-east',
@@ -290,6 +426,66 @@ const historicalEvents = {
         yearRange: [1500, 1800],
         events: [
             {
+                id: 'aztec-empire',
+                region: 'north-america',
+                title: 'Aztec Empire Peak',
+                year: 1500,
+                position: { x: 17, y: 40 },
+                icon: '🦅',
+                description: 'The Aztec Empire reached its height with Tenochtitlan as one of the world\'s largest cities.',
+                details: 'Tenochtitlan had a population of 200,000-300,000, larger than most European cities. The Aztecs built chinampas (floating gardens) and massive pyramids.',
+                keyFigures: ['Moctezuma II', 'Cuauhtémoc'],
+                culturalSignificance: 'Peak of Mesoamerican civilization before Spanish conquest.'
+            },
+            {
+                id: 'inca-empire',
+                region: 'south-america',
+                title: 'Inca Empire',
+                year: 1500,
+                position: { x: 22, y: 64 },
+                icon: '🏔️',
+                description: 'The Inca Empire stretched 4,000 km along the Andes, the largest empire in pre-Columbian America.',
+                details: 'The Inca built Machu Picchu and an extensive road network of 40,000 km. They used quipu (knotted strings) for record-keeping.',
+                keyFigures: ['Pachacuti', 'Atahualpa'],
+                culturalSignificance: 'Greatest empire in South American history with remarkable engineering.'
+            },
+            {
+                id: 'spanish-conquest',
+                region: 'north-america',
+                title: 'Spanish Conquest',
+                year: 1521,
+                position: { x: 18, y: 42 },
+                icon: '⚔️',
+                description: 'Hernán Cortés conquered the Aztec Empire, beginning Spanish colonization of the Americas.',
+                details: 'Disease killed up to 90% of the Indigenous population. The conquest brought cultural transformation and the blending of European and Indigenous traditions.',
+                keyFigures: ['Hernán Cortés', 'La Malinche'],
+                culturalSignificance: 'Beginning of colonial era and mestizo culture in the Americas.'
+            },
+            {
+                id: 'colonial-brazil',
+                region: 'south-america',
+                title: 'Colonial Brazil',
+                year: 1600,
+                position: { x: 28, y: 58 },
+                icon: '🌴',
+                description: 'Portuguese Brazil became a major sugar producer, driving the transatlantic slave trade.',
+                details: 'Brazil received more enslaved Africans than any other country. This created a diverse culture blending African, Indigenous, and European elements.',
+                keyFigures: ['Various colonial governors'],
+                culturalSignificance: 'Foundation of Brazilian cultural diversity and African diaspora influence.'
+            },
+            {
+                id: 'us-independence',
+                region: 'north-america',
+                title: 'American Revolution',
+                year: 1776,
+                position: { x: 22, y: 28 },
+                icon: '🗽',
+                description: 'The American colonies declared independence from Britain, establishing a new democratic republic.',
+                details: 'The Declaration of Independence and Constitution became models for democratic movements worldwide.',
+                keyFigures: ['George Washington', 'Thomas Jefferson', 'Benjamin Franklin'],
+                culturalSignificance: 'Birth of modern democratic republicanism.'
+            },
+            {
                 id: 'mughal-empire',
                 region: 'asia',
                 title: 'Mughal Empire',
@@ -357,6 +553,54 @@ const historicalEvents = {
         era: 'Modern Era',
         yearRange: [1800, 2025],
         events: [
+            {
+                id: 'latin-independence',
+                region: 'south-america',
+                title: 'South American Independence',
+                year: 1820,
+                position: { x: 24, y: 55 },
+                icon: '⚔️',
+                description: 'South American nations gained independence from Spain and Portugal in a wave of revolutionary wars.',
+                details: 'Simón Bolívar and José de San Martín led armies across the continent, liberating nations from colonial rule.',
+                keyFigures: ['Simón Bolívar', 'José de San Martín', 'Bernardo O\'Higgins'],
+                culturalSignificance: 'Birth of independent Latin American nations.'
+            },
+            {
+                id: 'mexican-revolution',
+                region: 'north-america',
+                title: 'Mexican Revolution',
+                year: 1910,
+                position: { x: 16, y: 38 },
+                icon: '✊',
+                description: 'The Mexican Revolution was a major social and political upheaval that shaped modern Mexico.',
+                details: 'The revolution led to land reform, labor rights, and the 1917 Constitution, one of the most progressive of its time.',
+                keyFigures: ['Emiliano Zapata', 'Pancho Villa', 'Venustiano Carranza'],
+                culturalSignificance: 'Foundation of modern Mexican identity and social reform.'
+            },
+            {
+                id: 'civil-rights',
+                region: 'north-america',
+                title: 'Civil Rights Movement',
+                year: 1963,
+                position: { x: 21, y: 30 },
+                icon: '✊',
+                description: 'The Civil Rights Movement fought for racial equality and justice in the United States.',
+                details: 'Through peaceful protest and legal action, the movement achieved landmark legislation including the Civil Rights Act of 1964.',
+                keyFigures: ['Martin Luther King Jr.', 'Rosa Parks', 'Malcolm X'],
+                culturalSignificance: 'Transformed American society and inspired movements worldwide.'
+            },
+            {
+                id: 'brazilian-growth',
+                region: 'south-america',
+                title: 'Brazil\'s Rise',
+                year: 2000,
+                position: { x: 27, y: 62 },
+                icon: '📈',
+                description: 'Brazil emerged as a major global economy and regional power in the 21st century.',
+                details: 'Economic reforms and social programs lifted millions from poverty. Brazil hosted the 2014 World Cup and 2016 Olympics.',
+                keyFigures: ['Fernando Henrique Cardoso', 'Luiz Inácio Lula da Silva'],
+                culturalSignificance: 'Emergence of Brazil as a BRICS nation and cultural powerhouse.'
+            },
             {
                 id: 'industrial-revolution',
                 region: 'europe',
@@ -477,6 +721,18 @@ const aboriginalCulture = {
 
 // Cultural achievements data for display in modals
 const culturalAchievements = {
+    'north-america': [
+        { name: 'Maya Writing System', icon: '📜', description: 'The most sophisticated writing system in pre-Columbian Americas.' },
+        { name: 'Totem Poles', icon: '🪵', description: 'Monumental carvings by Pacific Northwest Indigenous peoples.' },
+        { name: 'Jazz Music', icon: '🎷', description: 'Born in New Orleans, jazz is America\'s original art form.' },
+        { name: 'Mesoamerican Pyramids', icon: '🔺', description: 'Massive ceremonial structures built by Maya and Aztec civilizations.' }
+    ],
+    'south-america': [
+        { name: 'Inca Stonework', icon: '🧱', description: 'Precision-cut stones fitted without mortar that have survived earthquakes.' },
+        { name: 'Nazca Lines', icon: '🦅', description: 'Enormous geoglyphs in the Peruvian desert visible only from above.' },
+        { name: 'Samba & Carnival', icon: '💃', description: 'Brazil\'s vibrant music and celebration tradition.' },
+        { name: 'Andean Textiles', icon: '🧵', description: 'Intricate weavings with patterns encoding cultural knowledge.' }
+    ],
     asia: [
         { name: 'Chinese Calligraphy', icon: '🖌️', description: 'An ancient art form considered the supreme visual art in East Asia.' },
         { name: 'Japanese Tea Ceremony', icon: '🍵', description: 'A choreographed ritual of preparing and serving matcha green tea.' },

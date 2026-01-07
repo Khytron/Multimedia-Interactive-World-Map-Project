@@ -17,7 +17,7 @@ const mapPaths = {
                L 55 230 L 42 205 L 35 175 L 32 145 L 35 115 L 42 85 L 50 60 Z
                M 25 55 L 50 48 L 75 52 L 90 65 L 85 82 L 65 90 L 42 85 L 28 72 Z`,
         name: 'North America',
-        class: 'other'
+        class: 'north-america'
     },
     
     // South America
@@ -27,7 +27,7 @@ const mapPaths = {
                L 165 565 L 150 530 L 145 485 L 150 435 L 162 385 L 178 340 
                L 192 305 Z`,
         name: 'South America',
-        class: 'other'
+        class: 'south-america'
     },
     
     // Europe
@@ -219,50 +219,14 @@ function initializeMap() {
 function createRegionLabel(region) {
     // Labels for all 7 major regions
     const labelPositions = {
-        'other': null, // Will handle N.America and S.America separately
+        'north-america': { x: 160, y: 160 },
+        'south-america': { x: 240, y: 440 },
         'europe': { x: 490, y: 140 },
         'asia': { x: 800, y: 170 },
         'middle-east': { x: 600, y: 260 },
         'africa': { x: 470, y: 360 },
         'australia': { x: 900, y: 480 }
     };
-    
-    // Special handling for Americas
-    if (region.name === 'North America') {
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', '160');
-        text.setAttribute('y', '160');
-        text.setAttribute('class', 'region-label');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('font-family', 'Cinzel, serif');
-        text.setAttribute('font-size', '16');
-        text.setAttribute('font-weight', 'bold');
-        text.setAttribute('fill', '#3E2723');
-        text.setAttribute('stroke', '#F5F0E8');
-        text.setAttribute('stroke-width', '3');
-        text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('pointer-events', 'none');
-        text.textContent = 'North America';
-        return text;
-    }
-    
-    if (region.name === 'South America') {
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', '240');
-        text.setAttribute('y', '440');
-        text.setAttribute('class', 'region-label');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('font-family', 'Cinzel, serif');
-        text.setAttribute('font-size', '16');
-        text.setAttribute('font-weight', 'bold');
-        text.setAttribute('fill', '#3E2723');
-        text.setAttribute('stroke', '#F5F0E8');
-        text.setAttribute('stroke-width', '3');
-        text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('pointer-events', 'none');
-        text.textContent = 'South America';
-        return text;
-    }
     
     const pos = labelPositions[region.class];
     if (!pos) return null;
