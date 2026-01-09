@@ -245,9 +245,9 @@ function renderMarkers() {
         events = events.filter(event => event.region === appState.currentView);
     }
     
-    // Filter events that exist during current year
+    // Filter events: show only from exact year, visible for 150 years after
     events = events.filter(event => {
-        return Math.abs(event.year - appState.currentYear) <= 300;
+        return appState.currentYear >= event.year && appState.currentYear <= event.year + 150;
     });
     
     appState.filteredEvents = events;
