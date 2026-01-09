@@ -272,18 +272,29 @@ body {
 }
 
 .timeline-marks {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
     margin-top: 10px;
-    padding: 0 10px;
+    height: 20px;
+    padding: 0 12px;
 }
 
 .timeline-marks span {
+    position: absolute;
     font-size: 0.75rem;
     color: var(--light-brown);
     cursor: pointer;
     transition: var(--transition-fast);
+    transform: translateX(-50%);
 }
+
+/* Position marks based on actual slider scale: range -3000 to 2025 (5025 units) */
+.timeline-marks span:nth-child(1) { left: 0%; transform: translateX(0); }      /* -3000: 0% */
+.timeline-marks span:nth-child(2) { left: 39.8%; }   /* -1000: 2000/5025 */
+.timeline-marks span:nth-child(3) { left: 59.7%; }   /* 0: 3000/5025 */
+.timeline-marks span:nth-child(4) { left: 69.65%; }  /* 500: 3500/5025 */
+.timeline-marks span:nth-child(5) { left: 79.6%; }   /* 1000: 4000/5025 */
+.timeline-marks span:nth-child(6) { left: 89.55%; }  /* 1500: 4500/5025 */
+.timeline-marks span:nth-child(7) { left: 100%; transform: translateX(-100%); } /* 2000: ~100% */
 
 .timeline-marks span:hover {
     color: var(--gold);
