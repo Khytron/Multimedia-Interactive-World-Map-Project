@@ -475,27 +475,28 @@ function getCurrentMapView() {
  * Initialize pan/drag functionality for the map
  */
 function initPanDrag(svg) {
-    svg.style.cursor = 'grab';
-    
+    // Right-click pan (like Google Maps)
     svg.addEventListener('mousedown', handlePanStart);
-    svg.addEventListener('mousemove', handlePanMove);
-    svg.addEventListener('mouseup', handlePanEnd);
-    svg.addEventListener('mouseleave', handlePanEnd);
+    document.addEventListener('mousemove', handlePanMove);
+    document.addEventListener('mouseup', handlePanEnd);
     
-    // Touch support for mobile
+    // Prevent context menu on right-click
+    svg.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    // Touch support for mobile (two-finger pan)
     svg.addEventListener('touchstart', handleTouchStart, { passive: false });
     svg.addEventListener('touchmove', handleTouchMove, { passive: false });
     svg.addEventListener('touchend', handlePanEnd);
 }
 
 /**
- * Handle pan start (mousedown)
+ * Handle pan start (right-click mousedown)
  */
 function handlePanStart(e) {
-    // Don't pan if clicking on a marker or region
-    if (e.target.closest('.svg-marker') || e.target.closest('.region')) {
-        return;
-    }
+    // Only right-click (button 2) triggers pan
+    if (e.button !== 2) return;
+    
+    e.preventDefault();
     
     isPanning = true;
     const svg = document.getElementById('world-map');
@@ -544,43 +545,53 @@ function handlePanMove(e) {
 }
 
 /**
- * Handle pan end (mouseup/mouseleave)
+ * Handle pan end (mouseup)
  */
-function handlePanEnd() {
+function handlePanEnd(e) {
     if (!isPanning) return;
     
     isPanning = false;
     const svg = document.getElementById('world-map');
     if (svg) {
-        svg.style.cursor = 'grab';
+        svg.style.cursor = '';
     }
 }
 
 /**
- * Handle touch start for mobile
+ * Handle touch start for mobile (two-finger pan)
  */
 function handleTouchStart(e) {
-    if (e.touches.length === 1) {
-        const touch = e.touches[0];
-        // Create a fake mouse event
-        handlePanStart({ 
-            clientX: touch.clientX, 
-            clientY: touch.clientY,
-            target: e.target
-        });
+    if (e.touches.length === 2) {
+        e.preventDefault();
+        // Use midpoint of two touches
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        const midX = (touch1.clientX + touch2.clientX) / 2;
+        const midY = (touch1.clientY + touch2.clientY) / 2;
+        
+        isPanning = true;
+        panStart = { x: midX, y: midY };
+        
+        const svg = document.getElementById('world-map');
+        const viewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+        viewBoxStart = { x: viewBox[0], y: viewBox[1], width: viewBox[2], height: viewBox[3] };
     }
 }
 
 /**
- * Handle touch move for mobile
+ * Handle touch move for mobile (two-finger pan)
  */
 function handleTouchMove(e) {
-    if (e.touches.length === 1 && isPanning) {
+    if (e.touches.length === 2 && isPanning) {
         e.preventDefault();
-        const touch = e.touches[0];
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        const midX = (touch1.clientX + touch2.clientX) / 2;
+        const midY = (touch1.clientY + touch2.clientY) / 2;
+        
         handlePanMove({ 
-            clientX: touch.clientX, 
-            clientY: touch.clientY,
+            clientX: midX, 
+            clientY: midY,
             preventDefault: () => {}
         });
     }
