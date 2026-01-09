@@ -9,6 +9,7 @@ let mapTransform = { scale: 1, x: 0, y: 0 };
 
 // Pan/drag state
 let isPanning = false;
+let hasDragged = false;
 let panStart = { x: 0, y: 0 };
 let viewBoxStart = { x: 0, y: 0 };
 
@@ -364,6 +365,11 @@ function handleRegionLeave(e) {
  * Handle region click
  */
 function handleRegionClick(e) {
+    // Don't trigger click if user was dragging
+    if (hasDragged) {
+        return;
+    }
+    
     const regionClass = e.target.getAttribute('data-region');
     if (regionClass && regionClass !== 'other') {
         // Trigger custom event for app.js to handle
@@ -477,27 +483,33 @@ function getCurrentMapView() {
 function initPanDrag(svg) {
     svg.style.cursor = 'grab';
     
+    // Use document-level listeners for reliable tracking
     svg.addEventListener('mousedown', handlePanStart);
-    svg.addEventListener('mousemove', handlePanMove);
-    svg.addEventListener('mouseup', handlePanEnd);
-    svg.addEventListener('mouseleave', handlePanEnd);
+    document.addEventListener('mousemove', handlePanMove);
+    document.addEventListener('mouseup', handlePanEnd);
     
     // Touch support for mobile
     svg.addEventListener('touchstart', handleTouchStart, { passive: false });
-    svg.addEventListener('touchmove', handleTouchMove, { passive: false });
-    svg.addEventListener('touchend', handlePanEnd);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handlePanEnd);
 }
 
 /**
  * Handle pan start (mousedown)
  */
 function handlePanStart(e) {
-    // Don't pan if clicking on a marker or region
-    if (e.target.closest('.svg-marker') || e.target.closest('.region')) {
+    // Only left click (button 0)
+    if (e.button !== 0) return;
+    
+    // Don't pan if clicking on a marker
+    if (e.target.closest('.svg-marker')) {
         return;
     }
     
+    e.preventDefault();
     isPanning = true;
+    hasDragged = false;
+    
     const svg = document.getElementById('world-map');
     svg.style.cursor = 'grabbing';
     
@@ -516,6 +528,13 @@ function handlePanMove(e) {
     
     e.preventDefault();
     
+    // Check if user moved enough to count as a drag
+    const moveThreshold = 5;
+    if (Math.abs(e.clientX - panStart.x) > moveThreshold || 
+        Math.abs(e.clientY - panStart.y) > moveThreshold) {
+        hasDragged = true;
+    }
+    
     const svg = document.getElementById('world-map');
     const svgRect = svg.getBoundingClientRect();
     
@@ -530,9 +549,9 @@ function handlePanMove(e) {
     let newX = viewBoxStart.x + dx;
     let newY = viewBoxStart.y + dy;
     
-    // Clamp to prevent panning outside the map
-    const maxX = 1200 - viewBoxStart.width;
-    const maxY = 600 - viewBoxStart.height;
+    // Clamp to prevent panning outside the map (allow some padding)
+    const maxX = Math.max(0, 1200 - viewBoxStart.width);
+    const maxY = Math.max(0, 600 - viewBoxStart.height);
     newX = Math.max(0, Math.min(maxX, newX));
     newY = Math.max(0, Math.min(maxY, newY));
     
@@ -561,12 +580,15 @@ function handlePanEnd() {
  */
 function handleTouchStart(e) {
     if (e.touches.length === 1) {
+        e.preventDefault();
         const touch = e.touches[0];
-        // Create a fake mouse event
+        // Create a fake mouse event with button 0 (left click)
         handlePanStart({ 
+            button: 0,
             clientX: touch.clientX, 
             clientY: touch.clientY,
-            target: e.target
+            target: e.target,
+            preventDefault: () => {}
         });
     }
 }
