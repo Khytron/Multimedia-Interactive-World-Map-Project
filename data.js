@@ -17,7 +17,7 @@ const regionsData = {
             { icon: '🗽', text: 'Modern democracy and innovation' },
             { icon: '🦬', text: 'Diverse Indigenous cultures' }
         ],
-        viewBox: { x: 20, y: 30, width: 320, height: 280 }
+        viewBox: { x: 20, y: 20, width: 320, height: 380 }
     },
     'south-america': {
         id: 'south-america',
@@ -31,7 +31,7 @@ const regionsData = {
             { icon: '📿', text: 'Rich Indigenous traditions' },
             { icon: '🎭', text: 'Vibrant cultural fusion' }
         ],
-        viewBox: { x: 140, y: 270, width: 220, height: 350 }
+        viewBox: { x: 170, y: 300, width: 200, height: 320 }
     },
     asia: {
         id: 'asia',
@@ -47,7 +47,7 @@ const regionsData = {
             { icon: '✍️', text: 'Birthplace of writing (cuneiform)' },
             { icon: '🔬', text: 'Islamic Golden Age innovations' }
         ],
-        viewBox: { x: 500, y: 30, width: 550, height: 340 }
+        viewBox: { x: 520, y: 20, width: 600, height: 400 }
     },
     europe: {
         id: 'europe',
@@ -61,7 +61,7 @@ const regionsData = {
             { icon: '⚙️', text: 'Industrial Revolution origins' },
             { icon: '🗺️', text: 'Age of Exploration' }
         ],
-        viewBox: { x: 380, y: 60, width: 220, height: 180 }
+        viewBox: { x: 370, y: 40, width: 250, height: 200 }
     },
     africa: {
         id: 'africa',
@@ -75,7 +75,7 @@ const regionsData = {
             { icon: '🎭', text: 'Over 3,000 ethnic groups' },
             { icon: '📖', text: 'Ancient Egyptian civilization' }
         ],
-        viewBox: { x: 350, y: 180, width: 300, height: 400 }
+        viewBox: { x: 340, y: 170, width: 300, height: 380 }
     },
     australia: {
         id: 'australia',
@@ -89,7 +89,7 @@ const regionsData = {
             { icon: '🌿', text: 'Unique flora and fauna' },
             { icon: '🗣️', text: 'Over 250 Indigenous languages' }
         ],
-        viewBox: { x: 750, y: 340, width: 350, height: 280 }
+        viewBox: { x: 780, y: 370, width: 380, height: 280 }
     }
 };
 
