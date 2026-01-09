@@ -7,6 +7,11 @@
 let currentMapView = 'world';
 let mapTransform = { scale: 1, x: 0, y: 0 };
 
+// Pan/drag state
+let isPanning = false;
+let panStart = { x: 0, y: 0 };
+let viewBoxStart = { x: 0, y: 0 };
+
 // World map with 7 major regions only
 const mapPaths = {
     // North America
@@ -211,6 +216,9 @@ function initializeMap() {
     
     // Add compass rose
     addCompassRose(svg);
+    
+    // Initialize pan/drag functionality
+    initPanDrag(svg);
 }
 
 /**
@@ -461,6 +469,121 @@ function getMapTransform() {
  */
 function getCurrentMapView() {
     return currentMapView;
+}
+
+/**
+ * Initialize pan/drag functionality for the map
+ */
+function initPanDrag(svg) {
+    svg.style.cursor = 'grab';
+    
+    svg.addEventListener('mousedown', handlePanStart);
+    svg.addEventListener('mousemove', handlePanMove);
+    svg.addEventListener('mouseup', handlePanEnd);
+    svg.addEventListener('mouseleave', handlePanEnd);
+    
+    // Touch support for mobile
+    svg.addEventListener('touchstart', handleTouchStart, { passive: false });
+    svg.addEventListener('touchmove', handleTouchMove, { passive: false });
+    svg.addEventListener('touchend', handlePanEnd);
+}
+
+/**
+ * Handle pan start (mousedown)
+ */
+function handlePanStart(e) {
+    // Don't pan if clicking on a marker or region
+    if (e.target.closest('.svg-marker') || e.target.closest('.region')) {
+        return;
+    }
+    
+    isPanning = true;
+    const svg = document.getElementById('world-map');
+    svg.style.cursor = 'grabbing';
+    
+    panStart = { x: e.clientX, y: e.clientY };
+    
+    // Get current viewBox
+    const viewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+    viewBoxStart = { x: viewBox[0], y: viewBox[1], width: viewBox[2], height: viewBox[3] };
+}
+
+/**
+ * Handle pan move (mousemove)
+ */
+function handlePanMove(e) {
+    if (!isPanning) return;
+    
+    e.preventDefault();
+    
+    const svg = document.getElementById('world-map');
+    const svgRect = svg.getBoundingClientRect();
+    
+    // Calculate movement in SVG coordinates
+    const scaleX = viewBoxStart.width / svgRect.width;
+    const scaleY = viewBoxStart.height / svgRect.height;
+    
+    const dx = (panStart.x - e.clientX) * scaleX;
+    const dy = (panStart.y - e.clientY) * scaleY;
+    
+    // Calculate new viewBox position with bounds
+    let newX = viewBoxStart.x + dx;
+    let newY = viewBoxStart.y + dy;
+    
+    // Clamp to prevent panning outside the map
+    const maxX = 1200 - viewBoxStart.width;
+    const maxY = 600 - viewBoxStart.height;
+    newX = Math.max(0, Math.min(maxX, newX));
+    newY = Math.max(0, Math.min(maxY, newY));
+    
+    svg.setAttribute('viewBox', `${newX} ${newY} ${viewBoxStart.width} ${viewBoxStart.height}`);
+    
+    // Update mapTransform for marker positioning
+    mapTransform.x = newX;
+    mapTransform.y = newY;
+}
+
+/**
+ * Handle pan end (mouseup/mouseleave)
+ */
+function handlePanEnd() {
+    if (!isPanning) return;
+    
+    isPanning = false;
+    const svg = document.getElementById('world-map');
+    if (svg) {
+        svg.style.cursor = 'grab';
+    }
+}
+
+/**
+ * Handle touch start for mobile
+ */
+function handleTouchStart(e) {
+    if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        // Create a fake mouse event
+        handlePanStart({ 
+            clientX: touch.clientX, 
+            clientY: touch.clientY,
+            target: e.target
+        });
+    }
+}
+
+/**
+ * Handle touch move for mobile
+ */
+function handleTouchMove(e) {
+    if (e.touches.length === 1 && isPanning) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        handlePanMove({ 
+            clientX: touch.clientX, 
+            clientY: touch.clientY,
+            preventDefault: () => {}
+        });
+    }
 }
 
 // Export functions
