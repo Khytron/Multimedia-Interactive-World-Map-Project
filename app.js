@@ -233,21 +233,22 @@ function renderMarkers() {
     // Clear existing markers
     svgMarkersGroup.innerHTML = '';
     
-    // Get events for current era
-    const era = getEra(appState.currentYear);
-    const eraData = historicalEvents[era.id];
+    // Get events from ALL eras
+    let events = [];
+    Object.values(historicalEvents).forEach(era => {
+        if (era.events) {
+            events = events.concat(era.events);
+        }
+    });
     
-    if (!eraData) return;
-    
-    // Get all events, filter by region if not in world view
-    let events = eraData.events;
+    // Filter by region if not in world view
     if (appState.currentView !== 'world') {
         events = events.filter(event => event.region === appState.currentView);
     }
     
-    // Filter events: show only from exact year, visible for 200 years after
+    // Filter events: show only from exact year, visible for 150 years after
     events = events.filter(event => {
-        return appState.currentYear >= event.year && appState.currentYear <= event.year + 200;
+        return appState.currentYear >= event.year && appState.currentYear <= event.year + 150;
     });
     
     appState.filteredEvents = events;
