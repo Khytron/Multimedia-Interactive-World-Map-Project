@@ -57,7 +57,7 @@ const mapPaths = {
         class: 'africa'
     },
     
-    // Asia (includes Middle East)
+    // Asia (includes Middle East and Southeast Asia)
     asia: {
         path: `M 570 45 L 630 40 L 700 42 L 780 48 L 860 58 L 930 72 L 985 92 
                L 1020 120 L 1030 155 L 1018 190 L 990 220 L 950 245 L 905 265 
@@ -68,7 +68,9 @@ const mapPaths = {
                L 942 190 L 938 165 L 940 145 Z
                M 545 170 L 580 165 L 615 175 L 645 195 L 665 225 L 670 260 
                L 660 295 L 640 320 L 610 335 L 575 340 L 545 332 L 525 310 
-               L 518 280 L 520 245 L 530 210 L 540 185 Z`,
+               L 518 280 L 520 245 L 530 210 L 540 185 Z
+               M 855 280 L 870 295 L 875 330 L 865 370 L 845 405 L 820 430 
+               L 800 420 L 810 385 L 825 345 L 840 310 L 850 290 Z`,
         name: 'Asia',
         class: 'asia'
     },
