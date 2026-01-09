@@ -386,8 +386,10 @@ function openEventModal(event, index) {
     const yearText = event.year < 0 ? `${Math.abs(event.year)} BCE` : `${event.year} CE`;
     elements.modalEra.textContent = yearText;
     
-    // Set media (icon as placeholder)
-    elements.modalMedia.innerHTML = `<span>${event.icon}</span>`;
+    // Set media (image from images folder, fallback to icon)
+    const imageName = event.title.toLowerCase().replace(/['']/g, '').replace(/\s+/g, '-');
+    const imagePath = `images/${imageName}.png`;
+    elements.modalMedia.innerHTML = `<img src="${imagePath}" alt="${event.title}" onerror="this.parentElement.innerHTML='<span>${event.icon}</span>';">`;
     
     // Set text content
     let textHTML = `
