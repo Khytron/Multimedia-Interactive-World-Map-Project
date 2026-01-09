@@ -5,8 +5,9 @@ An educational interactive web application that allows users to explore world re
 ## Features
 
 - **Interactive World Map**: Click on regions to explore detailed cultural and historical information
+- **Drag-to-Pan Navigation**: Click and drag to pan around the map like Google Maps (desktop and mobile touch supported)
 - **Timeline Slider**: Travel through time from 3000 BCE to present day
-- **5 Regions**: Asia, Middle East, Europe, Africa, and Australia with unique content
+- **7 World Regions**: North America, South America, Europe, Africa, Middle East, Asia, and Oceania with unique content
 - **Cultural Markers**: Interactive markers showing historical events and cultural achievements
 - **Deep Dive Modals**: Detailed information about historical events, key figures, and cultural significance
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
@@ -30,9 +31,10 @@ Interactive World Map Web/
 
 1. **Open the Application**: Open `index.html` in a modern web browser
 2. **Navigate Regions**: Click on region buttons (Asia, Middle East, Europe, Africa, Australia) or click directly on the map
-3. **Explore Timeline**: Drag the timeline slider to explore different historical eras
-4. **View Events**: Click on cultural markers (golden circles) to see detailed information
-5. **Keyboard Shortcuts**:
+3. **Pan the Map**: Click and hold left mouse button, then drag to pan around the map (also works with touch on mobile)
+4. **Explore Timeline**: Drag the timeline slider to explore different historical eras
+5. **View Events**: Click on cultural markers (golden circles) to see detailed information
+6. **Keyboard Shortcuts**:
    - `1-6`: Quick navigation to regions
    - `←/→ Arrow keys`: Navigate timeline
    - `Escape`: Close modals/panels
@@ -73,3 +75,12 @@ Following the research specifications:
 This project was created as part of the FOM Interactive World Map educational initiative.
 
 © 2025 Interactive World Map Project
+
+---
+
+## Changelog
+
+### v1.1.0 (January 2026)
+- Added drag-to-pan map navigation (Google Maps style)
+- Touch support for mobile devices
+- Updated from 5 to 7 world regions
