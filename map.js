@@ -57,16 +57,7 @@ const mapPaths = {
         class: 'africa'
     },
     
-    // Middle East
-    middleEast: {
-        path: `M 545 170 L 580 165 L 615 175 L 645 195 L 665 225 L 670 260 
-               L 660 295 L 640 320 L 610 335 L 575 340 L 545 332 L 525 310 
-               L 518 280 L 520 245 L 530 210 L 540 185 Z`,
-        name: 'Middle East',
-        class: 'middle-east'
-    },
-    
-    // Asia
+    // Asia (includes Middle East)
     asia: {
         path: `M 570 45 L 630 40 L 700 42 L 780 48 L 860 58 L 930 72 L 985 92 
                L 1020 120 L 1030 155 L 1018 190 L 990 220 L 950 245 L 905 265 
@@ -74,7 +65,10 @@ const mapPaths = {
                L 610 230 L 605 195 L 608 160 L 618 125 L 635 95 L 660 70 
                L 615 60 L 580 55 Z
                M 940 135 L 960 128 L 975 140 L 978 165 L 970 188 L 955 198 
-               L 942 190 L 938 165 L 940 145 Z`,
+               L 942 190 L 938 165 L 940 145 Z
+               M 545 170 L 580 165 L 615 175 L 645 195 L 665 225 L 670 260 
+               L 660 295 L 640 320 L 610 335 L 575 340 L 545 332 L 525 310 
+               L 518 280 L 520 245 L 530 210 L 540 185 Z`,
         name: 'Asia',
         class: 'asia'
     },
@@ -231,8 +225,7 @@ function createRegionLabel(region) {
         'north-america': { x: 160, y: 160 },
         'south-america': { x: 240, y: 440 },
         'europe': { x: 490, y: 140 },
-        'asia': { x: 800, y: 170 },
-        'middle-east': { x: 600, y: 260 },
+        'asia': { x: 780, y: 180 },
         'africa': { x: 470, y: 360 },
         'australia': { x: 900, y: 480 }
     };

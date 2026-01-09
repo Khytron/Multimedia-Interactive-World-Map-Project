@@ -38,28 +38,16 @@ const regionsData = {
         name: 'Asia',
         icon: '🏯',
         color: '#E74C3C',
-        description: 'Asia is the largest continent, home to ancient civilizations including China, India, and Japan. The Silk Road connected East and West, facilitating trade and cultural exchange for centuries.',
+        description: 'Asia is the largest continent, home to ancient civilizations including China, India, Japan, and the Middle East - the cradle of civilization where writing and agriculture first emerged. The Silk Road connected East and West, and the Islamic Golden Age brought remarkable scientific achievements.',
         keyFacts: [
             { icon: '🌏', text: 'Largest continent by area and population' },
             { icon: '📜', text: 'Birthplace of major world religions' },
             { icon: '🛤️', text: 'Historic Silk Road trade routes' },
-            { icon: '🏛️', text: 'Ancient civilizations: China, India, Mesopotamia' }
-        ],
-        viewBox: { x: 550, y: 30, width: 500, height: 320 }
-    },
-    'middle-east': {
-        id: 'middle-east',
-        name: 'Middle East',
-        icon: '🕌',
-        color: '#F39C12',
-        description: 'The Middle East is the cradle of civilization, where writing, agriculture, and the first cities emerged. It witnessed the Islamic Golden Age, a period of remarkable scientific and cultural achievement.',
-        keyFacts: [
+            { icon: '🏛️', text: 'Ancient civilizations: China, India, Mesopotamia' },
             { icon: '✍️', text: 'Birthplace of writing (cuneiform)' },
-            { icon: '🌾', text: 'Origin of agriculture' },
-            { icon: '🔬', text: 'Islamic Golden Age innovations' },
-            { icon: '📚', text: 'House of Wisdom in Baghdad' }
+            { icon: '🔬', text: 'Islamic Golden Age innovations' }
         ],
-        viewBox: { x: 500, y: 150, width: 250, height: 220 }
+        viewBox: { x: 500, y: 30, width: 550, height: 340 }
     },
     europe: {
         id: 'europe',
@@ -151,7 +139,7 @@ const historicalEvents = {
             },
             {
                 id: 'babylon',
-                region: 'middle-east',
+                region: 'asia',
                 title: 'Rise of Babylon',
                 year: -1894,
                 position: { x: 55, y: 35 },
@@ -347,7 +335,7 @@ const historicalEvents = {
             },
             {
                 id: 'islamic-golden-age',
-                region: 'middle-east',
+                region: 'asia',
                 title: 'Islamic Golden Age',
                 year: 800,
                 position: { x: 53, y: 35 },
@@ -499,7 +487,7 @@ const historicalEvents = {
             },
             {
                 id: 'ottoman-empire',
-                region: 'middle-east',
+                region: 'asia',
                 title: 'Ottoman Empire Peak',
                 year: 1550,
                 position: { x: 50, y: 30 },
@@ -737,13 +725,10 @@ const culturalAchievements = {
         { name: 'Chinese Calligraphy', icon: '🖌️', description: 'An ancient art form considered the supreme visual art in East Asia.' },
         { name: 'Japanese Tea Ceremony', icon: '🍵', description: 'A choreographed ritual of preparing and serving matcha green tea.' },
         { name: 'Indian Classical Dance', icon: '💃', description: 'Ancient dance forms like Bharatanatyam and Kathak express spiritual themes.' },
-        { name: 'Thai Cuisine', icon: '🍜', description: 'Known for its balance of five fundamental flavors: sweet, sour, salty, bitter, and spicy.' }
-    ],
-    'middle-east': [
+        { name: 'Thai Cuisine', icon: '🍜', description: 'Known for its balance of five fundamental flavors: sweet, sour, salty, bitter, and spicy.' },
         { name: 'Arabic Calligraphy', icon: '✒️', description: 'Developed as an art form to beautify Quranic texts.' },
         { name: 'Persian Poetry', icon: '📜', description: 'Poets like Rumi and Hafez created works that resonate across cultures.' },
-        { name: 'Islamic Architecture', icon: '🕌', description: 'Characterized by geometric patterns, arabesques, and domes.' },
-        { name: 'Middle Eastern Music', icon: '🎵', description: 'Features maqam modes and instruments like the oud and qanun.' }
+        { name: 'Islamic Architecture', icon: '🕌', description: 'Characterized by geometric patterns, arabesques, and domes.' }
     ],
     europe: [
         { name: 'Renaissance Art', icon: '🎨', description: 'Revolutionized visual arts with perspective and human-centered themes.' },
@@ -831,7 +816,7 @@ const empires = {
     ottoman: {
         name: 'Ottoman Empire',
         period: [1299, 1922],
-        region: 'middle-east',
+        region: 'asia',
         color: '#006400'
     },
     mali: {

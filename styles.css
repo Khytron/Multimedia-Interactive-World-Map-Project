@@ -20,7 +20,6 @@
     
     /* Region Colors */
     --asia-color: #E74C3C;
-    --middle-east-color: #F39C12;
     --europe-color: #3498DB;
     --africa-color: #27AE60;
     --australia-color: #9B59B6;
@@ -342,10 +341,6 @@ body {
 .region.asia { fill: #FADBD8; }
 .region.asia:hover { fill: var(--asia-color); }
 .region.asia.active { fill: var(--asia-color); }
-
-.region.middle-east { fill: #FCF3CF; }
-.region.middle-east:hover { fill: var(--middle-east-color); }
-.region.middle-east.active { fill: var(--middle-east-color); }
 
 .region.europe { fill: #D4E6F1; }
 .region.europe:hover { fill: var(--europe-color); }

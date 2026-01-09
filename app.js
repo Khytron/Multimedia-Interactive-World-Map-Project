@@ -538,11 +538,12 @@ function handleKeyboard(e) {
     // Number keys for quick region navigation
     const regionKeys = {
         '1': 'world',
-        '2': 'asia',
-        '3': 'middle-east',
+        '2': 'north-america',
+        '3': 'south-america',
         '4': 'europe',
         '5': 'africa',
-        '6': 'australia'
+        '6': 'asia',
+        '7': 'australia'
     };
     
     if (regionKeys[e.key] && !appState.modalOpen) {

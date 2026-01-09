@@ -7,7 +7,7 @@ An educational interactive web application that allows users to explore world re
 - **Interactive World Map**: Click on regions to explore detailed cultural and historical information
 - **Drag-to-Pan Navigation**: Click and drag to pan around the map like Google Maps (desktop and mobile touch supported)
 - **Timeline Slider**: Travel through time from 3000 BCE to present day
-- **7 World Regions**: North America, South America, Europe, Africa, Middle East, Asia, and Oceania with unique content
+- **6 World Regions**: North America, South America, Europe, Africa, Asia, and Oceania with unique content
 - **Cultural Markers**: Interactive markers showing historical events and cultural achievements
 - **Deep Dive Modals**: Detailed information about historical events, key figures, and cultural significance
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
@@ -30,12 +30,12 @@ Interactive World Map Web/
 ## How to Use
 
 1. **Open the Application**: Open `index.html` in a modern web browser
-2. **Navigate Regions**: Click on region buttons (Asia, Middle East, Europe, Africa, Australia) or click directly on the map
+2. **Navigate Regions**: Click on region buttons or click directly on the map
 3. **Pan the Map**: Click and hold left mouse button, then drag to pan around the map (also works with touch on mobile)
 4. **Explore Timeline**: Drag the timeline slider to explore different historical eras
 5. **View Events**: Click on cultural markers (golden circles) to see detailed information
 6. **Keyboard Shortcuts**:
-   - `1-6`: Quick navigation to regions
+   - `1-7`: Quick navigation to regions
    - `←/→ Arrow keys`: Navigate timeline
    - `Escape`: Close modals/panels
 
@@ -79,6 +79,10 @@ This project was created as part of the FOM Interactive World Map educational in
 ---
 
 ## Changelog
+
+### v1.2.0 (January 2026)
+- Merged Middle East into Asia (6 regions total)
+- Updated region data and cultural achievements
 
 ### v1.1.0 (January 2026)
 - Added drag-to-pan map navigation (Google Maps style)
