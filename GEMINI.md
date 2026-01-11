@@ -40,9 +40,9 @@ The project follows a modular vanilla JavaScript architecture:
 *   **Interactive SVG Map:**
     *   Custom-drawn SVG paths for 6 major regions (North America, South America, Europe, Africa, Asia, Oceania).
     *   **Geographical Refinements:**
-        *   **Detailed Africa:** Integrated a high-resolution SVG path for Africa (including Madagascar).
-        *   **Realignment:** Applied SVG coordinate transforms to Europe, Asia, Oceania, and Americas to align with the new Africa path's scale and position.
-        *   **Organic Shapes:** Kept organic path refinements for SEA islands and Oceania.
+        *   **High-Resolution Anchors:** Integrated high-detail SVG paths for **Africa** and **Asia** from a consistent source.
+        *   **Realignment:** Applied transforms to other continents to align with the new high-res anchor.
+        *   **Organic Shapes:** Kept organic path refinements for Oceania.
     *   Dynamic coloring and hover effects.
     *   **Zoom & Pan:** ViewBox-based zooming for specific regions and drag-to-pan functionality when zoomed in.
 *   **Timeline System:**
