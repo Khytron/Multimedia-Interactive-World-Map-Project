@@ -74,11 +74,11 @@ const mapPaths = {
                M 855 280 L 870 295 L 875 320 L 865 350 L 850 365 
                L 830 355 L 835 325 L 845 300 L 852 285 Z
                M 665 308 Q 672 305 675 310 Q 673 320 668 322 Q 662 315 665 308 Z
-               M 850 310 Q 870 305 880 320 Q 875 340 855 335 Q 840 330 850 310 Z /* Borneo */
-               M 800 315 Q 820 325 835 335 Q 825 345 805 340 Q 790 330 800 315 Z /* Sumatra */
-               M 840 350 Q 870 348 890 355 Q 880 365 845 360 Q 835 355 840 350 Z /* Java */
-               M 910 260 Q 925 255 930 270 Q 925 290 915 285 Q 905 275 910 260 Z /* Philippines (Luzon) */
-               M 925 295 Q 940 290 945 305 Q 935 315 920 310 Q 915 300 925 295 Z /* Philippines (Mindanao) */`,
+               M 865 310 Q 885 305 895 320 Q 890 340 870 335 Q 855 330 865 310 Z /* Borneo (Shifted East) */
+               M 790 315 Q 810 325 825 335 Q 815 345 795 340 Q 780 330 790 315 Z /* Sumatra (Shifted West) */
+               M 840 360 Q 870 358 890 365 Q 880 375 845 370 Q 835 365 840 360 Z /* Java (Shifted South) */
+               M 910 240 Q 925 235 930 250 Q 925 270 915 265 Q 905 255 910 240 Z /* Philippines (Luzon - Shifted North) */
+               M 925 275 Q 940 270 945 285 Q 935 295 920 290 Q 915 280 925 275 Z /* Philippines (Mindanao - Shifted North) */`,
         name: 'Asia',
         class: 'asia'
     },
@@ -88,8 +88,8 @@ const mapPaths = {
         path: `M 860 400 Q 920 390 960 410 Q 975 430 970 470 Q 960 520 920 530 Q 880 540 850 510 Q 830 460 840 430 Q 850 410 860 400 Z /* Australia Main */
                M 890 395 Q 900 410 890 420 Q 880 410 890 395 Z /* Cape York Extension */
                M 940 360 Q 980 355 1000 370 Q 990 385 950 380 Q 930 370 940 360 Z /* New Guinea */
-               M 1020 530 Q 1035 525 1045 540 Q 1030 550 1015 540 Q 1010 535 1020 530 Z /* NZ North Island */
-               M 1005 555 Q 1030 550 1040 570 Q 1020 585 1000 575 Q 995 565 1005 555 Z /* NZ South Island */`,
+               M 1060 540 Q 1075 535 1085 550 Q 1070 560 1055 550 Q 1050 545 1060 540 Z /* NZ North Island (Shifted East) */
+               M 1045 565 Q 1070 560 1080 580 Q 1060 595 1040 585 Q 1035 575 1045 565 Z /* NZ South Island (Shifted East) */`,
         name: 'Oceania',
         class: 'australia'
     }
