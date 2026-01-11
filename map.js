@@ -156,13 +156,13 @@ function initializeMap() {
     
     svg.appendChild(defs);
     
-    // Create ocean background
+    // Create ocean background (transparent to let CSS background show through)
     const oceanBackground = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     oceanBackground.setAttribute('x', '0');
     oceanBackground.setAttribute('y', '0');
     oceanBackground.setAttribute('width', '1200');
     oceanBackground.setAttribute('height', '600');
-    oceanBackground.setAttribute('fill', 'url(#oceanGradient)');
+    oceanBackground.setAttribute('fill', 'transparent'); // Changed from url(#oceanGradient)
     oceanBackground.setAttribute('class', 'water');
     svg.appendChild(oceanBackground);
     
