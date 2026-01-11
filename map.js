@@ -211,9 +211,6 @@ function initializeMap() {
     // Add grid lines for reference
     addMapGrid(svg);
     
-    // Add compass rose
-    addCompassRose(svg);
-    
     // Initialize pan/drag functionality
     initPanDrag(svg);
     
@@ -314,53 +311,7 @@ function addMapGrid(svg) {
     svg.insertBefore(gridGroup, regionsGroup);
 }
 
-/**
- * Add compass rose decoration
- */
-function addCompassRose(svg) {
-    const compass = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    compass.setAttribute('id', 'compass-rose');
-    compass.setAttribute('transform', 'translate(80, 520)');
-    
-    // Outer circle
-    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('cx', '0');
-    circle.setAttribute('cy', '0');
-    circle.setAttribute('r', '35');
-    circle.setAttribute('fill', '#F4E4BC');
-    circle.setAttribute('stroke', '#C9A227');
-    circle.setAttribute('stroke-width', '2');
-    compass.appendChild(circle);
-    
-    // Compass directions
-    const directions = [
-        { text: 'N', x: 0, y: -22 },
-        { text: 'S', x: 0, y: 28 },
-        { text: 'E', x: 23, y: 5 },
-        { text: 'W', x: -23, y: 5 }
-    ];
-    
-    directions.forEach(dir => {
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', dir.x);
-        text.setAttribute('y', dir.y);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('font-family', 'Cinzel, serif');
-        text.setAttribute('font-size', '12');
-        text.setAttribute('font-weight', 'bold');
-        text.setAttribute('fill', '#3E2723');
-        text.textContent = dir.text;
-        compass.appendChild(text);
-    });
-    
-    // Compass needle
-    const needle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    needle.setAttribute('points', '0,-15 4,0 0,15 -4,0');
-    needle.setAttribute('fill', '#B7410E');
-    compass.appendChild(needle);
-    
-    svg.appendChild(compass);
-}
+
 
 /**
  * Handle region hover

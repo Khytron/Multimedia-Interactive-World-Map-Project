@@ -17,6 +17,10 @@ The project follows a modular vanilla JavaScript architecture:
 
 *   **`index.html`**: The main entry point, providing the DOM structure (header, timeline, map container, modals).
 *   **`styles.css`**: Handles all visual styling, utilizing CSS variables for theming ("Window to the Past"), responsive design, and transitions.
+*   **Layout Structure**:
+    *   **Header**: Fixed top.
+    *   **Main Layout**: Flex container with Left Sidebar (Compass), Center Map, and Right Sidebar (Controls).
+    *   **Footer**: Fixed bottom (Timeline).
 *   **`app.js` (Controller)**:
     *   Manages the Global Application State (`appState`).
     *   Handles UI event listeners (navigation, timeline, modals).

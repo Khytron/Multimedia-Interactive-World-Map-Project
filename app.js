@@ -454,7 +454,7 @@ function updateModalNavigation() {
  */
 function handleZoom(direction) {
     const step = 0.25;
-    const minZoom = 0.5;
+    const minZoom = 1;
     const maxZoom = 3;
     
     appState.zoomLevel += direction * step;
