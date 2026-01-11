@@ -79,3 +79,469 @@ const mapPaths = {
         transform: 'translate(200, 0)'
     }
 };
+
+// Ocean and water features
+const waterFeatures = {
+    atlanticOcean: {
+        path: `M 0 0 L 330 0 L 320 150 L 280 300 L 200 400 L 150 550 L 0 600 Z`,
+        name: 'Atlantic Ocean'
+    },
+    pacificOcean: {
+        path: `M 950 0 L 1200 0 L 1200 600 L 1000 600 L 1050 400 L 1000 200 L 970 100 Z`,
+        name: 'Pacific Ocean'
+    },
+    indianOcean: {
+        path: `M 500 300 L 600 280 L 750 320 L 800 400 L 750 500 L 600 520 L 500 480 L 480 400 Z`,
+        name: 'Indian Ocean'
+    },
+    arcticOcean: {
+        path: `M 200 0 L 900 0 L 900 40 L 200 40 Z`,
+        name: 'Arctic Ocean'
+    },
+    mediterraneanSea: {
+        path: `M 360 170 L 440 165 L 480 175 L 470 195 L 400 200 L 360 190 Z`,
+        name: 'Mediterranean Sea'
+    }
+};
+
+/**
+ * Initialize the SVG world map
+ */
+function initializeMap() {
+    const svg = document.getElementById('world-map');
+    if (!svg) return;
+    
+    // Clear existing content
+    svg.innerHTML = '';
+    
+    // Create defs for gradients and patterns
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    
+    // Ocean gradient
+    const oceanGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    oceanGradient.setAttribute('id', 'oceanGradient');
+    oceanGradient.setAttribute('x1', '0%');
+    oceanGradient.setAttribute('y1', '0%');
+    oceanGradient.setAttribute('x2', '0%');
+    oceanGradient.setAttribute('y2', '100%');
+    oceanGradient.innerHTML = `
+        <stop offset="0%" style="stop-color:#1A5276"/>
+        <stop offset="50%" style="stop-color:#2980B9"/>
+        <stop offset="100%" style="stop-color:#1A5276"/>
+    `;
+    defs.appendChild(oceanGradient);
+    
+    // Parchment pattern for land
+    const parchmentPattern = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
+    parchmentPattern.setAttribute('id', 'parchmentPattern');
+    parchmentPattern.setAttribute('patternUnits', 'userSpaceOnUse');
+    parchmentPattern.setAttribute('width', '100');
+    parchmentPattern.setAttribute('height', '100');
+    parchmentPattern.innerHTML = `
+        <rect width="100" height="100" fill="#E8D5B7"/>
+        <circle cx="25" cy="25" r="1" fill="#D4C4B5" opacity="0.5"/>
+        <circle cx="75" cy="75" r="1" fill="#D4C4B5" opacity="0.5"/>
+        <circle cx="50" cy="50" r="1.5" fill="#D4C4B5" opacity="0.3"/>
+    `;
+    defs.appendChild(parchmentPattern);
+    
+    svg.appendChild(defs);
+    
+    // Create ocean background (transparent to let CSS background show through)
+    const oceanBackground = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    oceanBackground.setAttribute('x', '0');
+    oceanBackground.setAttribute('y', '0');
+    oceanBackground.setAttribute('width', '1200');
+    oceanBackground.setAttribute('height', '600');
+    oceanBackground.setAttribute('fill', 'transparent'); // Changed from url(#oceanGradient)
+    oceanBackground.setAttribute('class', 'water');
+    svg.appendChild(oceanBackground);
+    
+    // Create groups for layering
+    const landGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    landGroup.setAttribute('id', 'land-group');
+    
+    const regionsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    regionsGroup.setAttribute('id', 'regions-group');
+    
+    const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    labelsGroup.setAttribute('id', 'labels-group');
+    
+    // Draw main regions
+    Object.keys(mapPaths).forEach(key => {
+        const region = mapPaths[key];
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', region.path);
+        path.setAttribute('class', `region ${region.class}`);
+        path.setAttribute('data-region', region.class);
+        path.setAttribute('id', `region-${key}`);
+        
+        // Apply coordinate transform if specified
+        if (region.transform) {
+            path.setAttribute('transform', region.transform);
+        }
+        
+        // Add hover and click events
+        path.addEventListener('mouseenter', handleRegionHover);
+        path.addEventListener('mouseleave', handleRegionLeave);
+        path.addEventListener('click', handleRegionClick);
+        
+        regionsGroup.appendChild(path);
+        
+        // Add region label
+        const label = createRegionLabel(region);
+        if (label) {
+            labelsGroup.appendChild(label);
+        }
+    });
+    
+    svg.appendChild(landGroup);
+    svg.appendChild(regionsGroup);
+    svg.appendChild(labelsGroup);
+    
+    // Create markers group inside SVG for proper scaling
+    const markersGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    markersGroup.setAttribute('id', 'svg-markers-group');
+    svg.appendChild(markersGroup);
+    
+    // Initialize pan/drag functionality
+    initPanDrag(svg);
+    
+    // Initialize wheel zoom
+    initWheelZoom(svg);
+}
+
+/**
+ * Initialize wheel zoom functionality
+ */
+function initWheelZoom(svg) {
+    svg.addEventListener('wheel', (e) => {
+        // Prevent default page scroll
+        e.preventDefault();
+        
+        // Determine zoom direction (negative deltaY is zooming in)
+        const direction = e.deltaY < 0 ? 1 : -1;
+        
+        // Dispatch custom event for app.js to handle state update
+        const event = new CustomEvent('mapZoom', {
+            detail: { direction: direction }
+        });
+        document.dispatchEvent(event);
+    }, { passive: false });
+}
+
+/**
+ * Create label for a region
+ */
+function createRegionLabel(region) {
+    // Labels for all 7 major regions
+    const labelPositions = {
+        'north-america': { x: 160, y: 160 },
+        'south-america': { x: 240, y: 440 },
+        'europe': { x: 490, y: 140 },
+        'asia': { x: 780, y: 180 },
+        'africa': { x: 470, y: 360 },
+        'australia': { x: 900, y: 480 }
+    };
+    
+    const pos = labelPositions[region.class];
+    if (!pos) return null;
+    
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', pos.x);
+    text.setAttribute('y', pos.y);
+    text.setAttribute('class', 'region-label');
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('font-family', 'Cinzel, serif');
+    text.setAttribute('font-size', '18');
+    text.setAttribute('font-weight', 'bold');
+    text.setAttribute('fill', '#3E2723');
+    text.setAttribute('stroke', '#F5F0E8');
+    text.setAttribute('stroke-width', '3');
+    text.setAttribute('paint-order', 'stroke');
+    text.setAttribute('pointer-events', 'none');
+    text.textContent = region.name;
+    
+    return text;
+}
+
+
+
+
+
+/**
+ * Handle region hover
+ */
+function handleRegionHover(e) {
+    const region = e.target;
+    region.style.filter = 'brightness(1.1) drop-shadow(0 0 10px rgba(201, 162, 39, 0.5))';
+}
+
+/**
+ * Handle region leave
+ */
+function handleRegionLeave(e) {
+    const region = e.target;
+    region.style.filter = '';
+}
+
+/**
+ * Handle region click
+ */
+function handleRegionClick(e) {
+    // Don't trigger click if user was dragging
+    if (hasDragged) {
+        return;
+    }
+    
+    const regionClass = e.target.getAttribute('data-region');
+    if (regionClass && regionClass !== 'other') {
+        // Trigger custom event for app.js to handle
+        const event = new CustomEvent('regionSelected', {
+            detail: { region: regionClass }
+        });
+        document.dispatchEvent(event);
+    }
+}
+
+/**
+ * Highlight a specific region
+ */
+function highlightRegion(regionId) {
+    // Remove previous highlights
+    document.querySelectorAll('.region.active').forEach(r => {
+        r.classList.remove('active');
+    });
+    
+    // Add highlight to selected region
+    const regionElement = document.querySelector(`.region.${regionId}`);
+    if (regionElement) {
+        regionElement.classList.add('active');
+    }
+}
+
+/**
+ * Reset all region highlights
+ */
+function resetRegionHighlights() {
+    document.querySelectorAll('.region.active').forEach(r => {
+        r.classList.remove('active');
+    });
+}
+
+/**
+ * Zoom to a specific region using viewBox
+ */
+function zoomToRegion(regionId, viewBox) {
+    const svg = document.getElementById('world-map');
+    if (!svg || !viewBox) return;
+    
+    currentMapView = regionId;
+    const { x, y, width, height } = viewBox;
+    
+    // Animate viewBox change
+    svg.style.transition = 'none';
+    svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
+    
+    // Store transform for marker positioning
+    mapTransform = { 
+        scale: 1200 / width, 
+        x: x, 
+        y: y,
+        width: width,
+        height: height
+    };
+}
+
+/**
+ * Reset map to world view
+ */
+function resetMapView() {
+    const svg = document.getElementById('world-map');
+    if (!svg) return;
+    
+    currentMapView = 'world';
+    svg.setAttribute('viewBox', '0 0 1200 600');
+    mapTransform = { scale: 1, x: 0, y: 0, width: 1200, height: 600 };
+    resetRegionHighlights();
+}
+
+/**
+ * Apply zoom level to map (for zoom buttons)
+ */
+function applyZoom(level) {
+    // Zoom buttons are disabled in region view
+    if (currentMapView !== 'world') return;
+    
+    const svg = document.getElementById('world-map');
+    if (!svg) return;
+    
+    const centerX = 600;
+    const centerY = 300;
+    const newWidth = 1200 / level;
+    const newHeight = 600 / level;
+    const newX = centerX - newWidth / 2;
+    const newY = centerY - newHeight / 2;
+    
+    svg.setAttribute('viewBox', `${Math.max(0, newX)} ${Math.max(0, newY)} ${newWidth} ${newHeight}`);
+    mapTransform = { scale: level, x: Math.max(0, newX), y: Math.max(0, newY), width: newWidth, height: newHeight };
+}
+
+/**
+ * Get current map transform for marker positioning
+ */
+function getMapTransform() {
+    return mapTransform;
+}
+
+/**
+ * Get current map view
+ */
+function getCurrentMapView() {
+    return currentMapView;
+}
+
+/**
+ * Initialize pan/drag functionality for the map
+ */
+function initPanDrag(svg) {
+    svg.style.cursor = 'grab';
+    
+    // Use document-level listeners for reliable tracking
+    svg.addEventListener('mousedown', handlePanStart);
+    document.addEventListener('mousemove', handlePanMove);
+    document.addEventListener('mouseup', handlePanEnd);
+    
+    // Touch support for mobile
+    svg.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handlePanEnd);
+}
+
+/**
+ * Handle pan start (mousedown)
+ */
+function handlePanStart(e) {
+    // Only left click (button 0)
+    if (e.button !== 0) return;
+    
+    // Don't pan if clicking on a marker
+    if (e.target.closest('.svg-marker')) {
+        return;
+    }
+    
+    e.preventDefault();
+    isPanning = true;
+    hasDragged = false;
+    
+    const svg = document.getElementById('world-map');
+    svg.style.cursor = 'grabbing';
+    
+    panStart = { x: e.clientX, y: e.clientY };
+    
+    // Get current viewBox
+    const viewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+    viewBoxStart = { x: viewBox[0], y: viewBox[1], width: viewBox[2], height: viewBox[3] };
+}
+
+/**
+ * Handle pan move (mousemove)
+ */
+function handlePanMove(e) {
+    if (!isPanning) return;
+    
+    e.preventDefault();
+    
+    // Check if user moved enough to count as a drag
+    const moveThreshold = 5;
+    if (Math.abs(e.clientX - panStart.x) > moveThreshold || 
+        Math.abs(e.clientY - panStart.y) > moveThreshold) {
+        hasDragged = true;
+    }
+    
+    const svg = document.getElementById('world-map');
+    const svgRect = svg.getBoundingClientRect();
+    
+    // Calculate movement in SVG coordinates
+    const scaleX = viewBoxStart.width / svgRect.width;
+    const scaleY = viewBoxStart.height / svgRect.height;
+    
+    const dx = (panStart.x - e.clientX) * scaleX;
+    const dy = (panStart.y - e.clientY) * scaleY;
+    
+    // Calculate new viewBox position with bounds
+    let newX = viewBoxStart.x + dx;
+    let newY = viewBoxStart.y + dy;
+    
+    // Clamp to prevent panning outside the map (allow some padding)
+    const maxX = Math.max(0, 1200 - viewBoxStart.width);
+    const maxY = Math.max(0, 600 - viewBoxStart.height);
+    newX = Math.max(0, Math.min(maxX, newX));
+    newY = Math.max(0, Math.min(maxY, newY));
+    
+    svg.setAttribute('viewBox', `${newX} ${newY} ${viewBoxStart.width} ${viewBoxStart.height}`);
+    
+    // Update mapTransform for marker positioning
+    mapTransform.x = newX;
+    mapTransform.y = newY;
+}
+
+/**
+ * Handle pan end (mouseup/mouseleave)
+ */
+function handlePanEnd() {
+    if (!isPanning) return;
+    
+    isPanning = false;
+    const svg = document.getElementById('world-map');
+    if (svg) {
+        svg.style.cursor = 'grab';
+    }
+}
+
+/**
+ * Handle touch start for mobile
+ */
+function handleTouchStart(e) {
+    if (e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        // Create a fake mouse event with button 0 (left click)
+        handlePanStart({ 
+            button: 0,
+            clientX: touch.clientX, 
+            clientY: touch.clientY,
+            target: e.target,
+            preventDefault: () => {}
+        });
+    }
+}
+
+/**
+ * Handle touch move for mobile
+ */
+function handleTouchMove(e) {
+    if (e.touches.length === 1 && isPanning) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        handlePanMove({ 
+            clientX: touch.clientX, 
+            clientY: touch.clientY,
+            preventDefault: () => {}
+        });
+    }
+}
+
+// Export functions
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        initializeMap,
+        highlightRegion,
+        resetRegionHighlights,
+        zoomToRegion,
+        resetMapView,
+        applyZoom,
+        getMapTransform,
+        getCurrentMapView
+    };
+}
