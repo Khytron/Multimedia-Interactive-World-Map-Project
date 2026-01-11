@@ -41,8 +41,9 @@ The project follows a modular vanilla JavaScript architecture:
     *   Custom-drawn SVG paths for 6 major regions (North America, South America, Europe, Africa, Asia, Oceania).
     *   **Geographical Refinements:**
         *   Added separate organic paths for major islands (Madagascar, Iceland, Sri Lanka).
-        *   Refined Southeast Asia (Borneo, Sumatra, Java, Philippines) with improved spacing.
-        *   Redrew Oceania (Organic Australia, NZ North/South Islands shifted for visibility, New Guinea).
+        *   Refined Southeast Asia (Borneo, Sumatra, Java, Philippines, Malay Peninsula) with improved spacing.
+        *   Redrew Oceania (Organic Australia, NZ elongated and moved closer, New Guinea).
+        *   Smoothed Asia's northern coastline (Kamchatka).
     *   Dynamic coloring and hover effects.
     *   **Zoom & Pan:** ViewBox-based zooming for specific regions and drag-to-pan functionality when zoomed in.
     *   **Mouse Wheel Zoom:** Users can zoom in/out using the scroll wheel (dispatches `mapZoom` event to controller).
