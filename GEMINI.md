@@ -82,5 +82,6 @@ The project follows a modular vanilla JavaScript architecture:
 *   **Design Style:** "Window to the Past" (earthy tones, parchment textures).
 *   **Map Logic:** Markers are rendered *inside* the SVG coordinate system to scale correctly with the map.
 *   **Ocean Rendering:** CSS `.water` class set to `transparent`. Map container provides the visible gradient background.
+*   **Path Rendering:** SVG `d` attributes are strict strings; comments inside them have been removed to ensure all islands render correctly.
 *   **Region Definition:** Explicitly defines 6 regions. "Middle East" is historically grouped under Asia for this project's simplification.
 *   **Unimplemented Data:** `tradeRoutes` and `empires` data objects exist in `data.js` but are not currently rendered or used in the application.
