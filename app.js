@@ -39,6 +39,9 @@ function initApp() {
     // Render initial markers
     renderMarkers();
     
+    // Update trade routes
+    updateTradeRoutes();
+    
     // Hide loading screen after initialization
     setTimeout(() => {
         document.getElementById('loading-screen').classList.add('hidden');
@@ -205,8 +208,28 @@ function handleYearChange(e) {
     // Update markers based on year
     renderMarkers();
     
+    // Update trade routes based on year
+    updateTradeRoutes();
+    
     // Update map styling based on era
     updateMapStyling(era.id);
+}
+
+/**
+ * Update trade routes based on current year
+ */
+function updateTradeRoutes() {
+    if (typeof tradeRoutes === 'undefined' || typeof renderTradeRoutes === 'undefined') return;
+    
+    const activeRoutes = [];
+    
+    Object.values(tradeRoutes).forEach(route => {
+        if (appState.currentYear >= route.period[0] && appState.currentYear <= route.period[1]) {
+            activeRoutes.push(route);
+        }
+    });
+    
+    renderTradeRoutes(activeRoutes);
 }
 
 /**

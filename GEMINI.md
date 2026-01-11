@@ -55,6 +55,9 @@ The project follows a modular vanilla JavaScript architecture:
 *   **Historical Markers:**
     *   SVG-based markers positioned by percentage coordinates.
     *   Clicking a marker opens a "Deep Dive Modal" with detailed history, images, and cultural significance.
+*   **Trade Routes:**
+    *   Dynamic visualization of historical trade routes (Silk Road, Trans-Saharan, Spice Route).
+    *   Routes appear/disappear based on the timeline slider.
 *   **Navigation:**
     *   Button-based navigation for regions.
     *   Keyboard shortcuts (1-7 for regions, arrows for timeline/modals).
@@ -83,5 +86,4 @@ The project follows a modular vanilla JavaScript architecture:
 *   **Map Logic:** Markers are rendered *inside* the SVG coordinate system to scale correctly with the map.
 *   **Ocean Rendering:** CSS `.water` class set to `transparent`. Map container provides the visible gradient background.
 *   **Region Definition:** Explicitly defines 6 regions. "Middle East" is historically grouped under Asia for this project's simplification.
-*   **Audio:** The `<audio>` element in `index.html` is currently commented out to prevent 404 errors as the asset is missing.
-*   **Unimplemented Data:** `tradeRoutes` and `empires` data objects exist in `data.js` but are not currently rendered or used in the application.
+*   **Unimplemented Data:** `empires` data objects exist in `data.js` but are not currently rendered or used in the application.
