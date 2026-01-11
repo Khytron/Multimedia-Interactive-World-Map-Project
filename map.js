@@ -219,14 +219,14 @@ function initWheelZoom(svg) {
  * Create label for a region
  */
 function createRegionLabel(region) {
-    // Labels for all 6 major regions
+    // Labels for all 6 major regions - positioned at center of each region
     const labelPositions = {
-        'north-america': { x: 300, y: 190 },
-        'south-america': { x: 400, y: 430 },
-        'europe': { x: 700, y: 190 },
-        'asia': { x: 850, y: 290 },
-        'africa': { x: 650, y: 350 },
-        'australia': { x: 1020, y: 480 }
+        'north-america': { x: 280, y: 185 },
+        'south-america': { x: 410, y: 470 },
+        'europe': { x: 580, y: 160 },
+        'asia': { x: 890, y: 250 },
+        'africa': { x: 610, y: 390 },
+        'australia': { x: 920, y: 480 }
     };
     
     const pos = labelPositions[region.class];
