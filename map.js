@@ -43,7 +43,7 @@ const mapPaths = {
                L 492 188 L 470 190 L 450 185 L 435 175 L 425 160 L 420 142 
                L 418 122 L 422 105 Z
                M 400 100 L 418 95 L 425 108 L 420 125 L 408 130 L 395 122 L 395 108 Z
-               M 355 65 L 375 68 L 370 82 L 350 78 Z`, /* Added Iceland */
+               M 355 70 Q 365 65 375 70 Q 378 78 370 82 Q 360 85 355 78 Q 352 74 355 70 Z`, /* Refined Iceland */
         name: 'Europe',
         class: 'europe'
     },
@@ -54,7 +54,7 @@ const mapPaths = {
                L 575 310 L 570 355 L 558 400 L 540 440 L 515 475 L 485 500 
                L 450 512 L 415 510 L 385 495 L 362 470 L 350 435 L 345 395 
                L 348 350 L 358 305 L 375 265 L 395 230 L 410 208 Z
-               M 565 430 L 580 435 L 575 465 L 560 460 Z`, /* Added Madagascar */
+               M 565 435 Q 575 430 580 440 Q 578 460 570 465 Q 560 460 562 445 Z`, /* Refined Madagascar */
         name: 'Africa',
         class: 'africa'
     },
@@ -73,7 +73,7 @@ const mapPaths = {
                L 518 280 L 520 245 L 530 210 L 540 185 Z
                M 855 280 L 870 295 L 875 320 L 865 350 L 850 365 
                L 830 355 L 835 325 L 845 300 L 852 285 Z
-               M 665 305 L 675 305 L 672 320 L 662 315 Z`, /* Added Sri Lanka */
+               M 665 308 Q 672 305 675 310 Q 673 320 668 322 Q 662 315 665 308 Z`, /* Refined Sri Lanka */
         name: 'Asia',
         class: 'asia'
     },
