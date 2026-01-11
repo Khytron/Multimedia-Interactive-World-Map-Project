@@ -77,7 +77,7 @@ The project follows a modular vanilla JavaScript architecture:
 ## 6. Current Context & Constraints
 *   **Design Style:** "Window to the Past" (earthy tones, parchment textures).
 *   **Map Logic:** Markers are rendered *inside* the SVG coordinate system to scale correctly with the map.
-*   **Ocean Rendering:** SVG water background is transparent. Map container uses a linear gradient (Deep Blue -> Light Blue -> Deep Blue). Grid lines removed.
+*   **Ocean Rendering:** CSS `.water` class set to `transparent`. Map container provides the visible gradient background.
 *   **Region Definition:** Explicitly defines 6 regions. "Middle East" is historically grouped under Asia for this project's simplification.
 *   **Audio:** The `<audio>` element in `index.html` is currently commented out to prevent 404 errors as the asset is missing.
 *   **Unimplemented Data:** `tradeRoutes` and `empires` data objects exist in `data.js` but are not currently rendered or used in the application.

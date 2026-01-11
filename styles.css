@@ -353,7 +353,7 @@ body {
 #map-container {
     flex: 1;
     position: relative;
-    background: linear-gradient(180deg, var(--ocean) 0%, #2980B9 50%, var(--ocean) 100%);
+    background: linear-gradient(180deg, var(--ocean) 0%, #21618C 50%, var(--ocean) 100%);
     overflow: hidden;
     /* Reset fixed positioning from previous version */
     top: auto;
@@ -431,7 +431,7 @@ body {
 .region.other.active { fill: var(--north-america-color); }
 
 .water {
-    fill: var(--ocean);
+    fill: transparent;
 }
 
 /* SVG Markers (inside SVG, scale with map) */
