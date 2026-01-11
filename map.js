@@ -211,11 +211,6 @@ function initializeMap() {
     svg.appendChild(regionsGroup);
     svg.appendChild(labelsGroup);
     
-    // Create trade routes group (before markers so lines are behind)
-    const routesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    routesGroup.setAttribute('id', 'trade-routes-group');
-    svg.appendChild(routesGroup);
-
     // Create markers group inside SVG for proper scaling
     const markersGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     markersGroup.setAttribute('id', 'svg-markers-group');
@@ -549,66 +544,6 @@ function handleTouchMove(e) {
     }
 }
 
-/**
- * Render trade routes on the map
- */
-function renderTradeRoutes(routes) {
-    const routesGroup = document.getElementById('trade-routes-group');
-    if (!routesGroup) return;
-    
-    // Clear existing routes
-    routesGroup.innerHTML = '';
-    
-    routes.forEach(route => {
-        if (!route.path || route.path.length < 2) return;
-        
-        // Build path data
-        let d = '';
-        route.path.forEach((point, i) => {
-            const svgX = (point.x / 100) * 1200;
-            const svgY = (point.y / 100) * 600;
-            
-            if (i === 0) {
-                d += `M ${svgX} ${svgY}`;
-            } else {
-                d += ` L ${svgX} ${svgY}`;
-            }
-        });
-        
-        // Create path element
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', d);
-        path.setAttribute('stroke', route.color || '#C9A227');
-        path.setAttribute('stroke-width', '3');
-        path.setAttribute('stroke-dasharray', '8,4');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('opacity', '0.8');
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('class', 'trade-route');
-        
-        // Add hover effect
-        path.style.transition = 'all 0.3s ease';
-        path.style.cursor = 'help';
-        
-        path.addEventListener('mouseenter', (e) => {
-            e.target.setAttribute('stroke-width', '5');
-            e.target.setAttribute('opacity', '1');
-        });
-        
-        path.addEventListener('mouseleave', (e) => {
-            e.target.setAttribute('stroke-width', '3');
-            e.target.setAttribute('opacity', '0.8');
-        });
-        
-        // Simple title tooltip
-        const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-        title.textContent = route.name;
-        path.appendChild(title);
-        
-        routesGroup.appendChild(path);
-    });
-}
-
 // Export functions
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -619,7 +554,6 @@ if (typeof module !== 'undefined' && module.exports) {
         resetMapView,
         applyZoom,
         getMapTransform,
-        getCurrentMapView,
-        renderTradeRoutes
+        getCurrentMapView
     };
 }
