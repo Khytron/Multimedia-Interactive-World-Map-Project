@@ -223,10 +223,10 @@ function createRegionLabel(region) {
     const labelPositions = {
         'north-america': { x: 300, y: 200 },
         'south-america': { x: 400, y: 440 },
-        'europe': { x: 600, y: 200 },
+        'europe': { x: 700, y: 200 },
         'asia': { x: 850, y: 300 },
-        'africa': { x: 550, y: 360 },
-        'australia': { x: 1050, y: 530 }
+        'africa': { x: 650, y: 360 },
+        'australia': { x: 1020, y: 500 }
     };
     
     const pos = labelPositions[region.class];
