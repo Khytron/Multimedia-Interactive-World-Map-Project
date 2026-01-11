@@ -37,6 +37,7 @@ The project follows a modular vanilla JavaScript architecture:
     *   Custom-drawn SVG paths for 6 major regions (North America, South America, Europe, Africa, Asia, Oceania).
     *   Dynamic coloring and hover effects.
     *   **Zoom & Pan:** ViewBox-based zooming for specific regions and drag-to-pan functionality when zoomed in.
+    *   **Mouse Wheel Zoom:** Users can zoom in/out using the scroll wheel (dispatches `mapZoom` event to controller).
 *   **Timeline System:**
     *   Slider control spanning -3000 to 2025.
     *   Updates the map "Era" (visual styling) and filters visible event markers.
@@ -73,4 +74,5 @@ The project follows a modular vanilla JavaScript architecture:
 *   **Design Style:** "Window to the Past" (earthy tones, parchment textures).
 *   **Map Logic:** Markers are rendered *inside* the SVG coordinate system to scale correctly with the map.
 *   **Region Definition:** Explicitly defines 6 regions. "Middle East" is historically grouped under Asia for this project's simplification.
+*   **Audio:** The `<audio>` element in `index.html` is currently commented out to prevent 404 errors as the asset is missing.
 *   **Unimplemented Data:** `tradeRoutes` and `empires` data objects exist in `data.js` but are not currently rendered or used in the application.

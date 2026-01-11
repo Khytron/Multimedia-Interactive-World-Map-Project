@@ -150,6 +150,11 @@ function setupEventListeners() {
         handleNavigation(e.detail.region);
     });
     
+    // Custom map zoom event from map.js (mouse wheel)
+    document.addEventListener('mapZoom', (e) => {
+        handleZoom(e.detail.direction);
+    });
+    
     // Keyboard navigation
     document.addEventListener('keydown', handleKeyboard);
 }

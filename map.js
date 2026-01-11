@@ -216,6 +216,28 @@ function initializeMap() {
     
     // Initialize pan/drag functionality
     initPanDrag(svg);
+    
+    // Initialize wheel zoom
+    initWheelZoom(svg);
+}
+
+/**
+ * Initialize wheel zoom functionality
+ */
+function initWheelZoom(svg) {
+    svg.addEventListener('wheel', (e) => {
+        // Prevent default page scroll
+        e.preventDefault();
+        
+        // Determine zoom direction (negative deltaY is zooming in)
+        const direction = e.deltaY < 0 ? 1 : -1;
+        
+        // Dispatch custom event for app.js to handle state update
+        const event = new CustomEvent('mapZoom', {
+            detail: { direction: direction }
+        });
+        document.dispatchEvent(event);
+    }, { passive: false });
 }
 
 /**
