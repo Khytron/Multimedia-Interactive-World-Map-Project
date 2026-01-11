@@ -39,7 +39,10 @@ The project follows a modular vanilla JavaScript architecture:
 ## 4. Key Features
 *   **Interactive SVG Map:**
     *   Custom-drawn SVG paths for 6 major regions (North America, South America, Europe, Africa, Asia, Oceania).
-    *   **Geographical Refinements:** Added separate paths for major islands like Madagascar, Iceland, and Sri Lanka with organic, rounded shapes.
+    *   **Geographical Refinements:**
+        *   Added separate organic paths for major islands (Madagascar, Iceland, Sri Lanka).
+        *   Refined Southeast Asia (Borneo, Sumatra, Java, Philippines).
+        *   Redrew Oceania (Organic Australia, NZ North/South Islands, New Guinea).
     *   Dynamic coloring and hover effects.
     *   **Zoom & Pan:** ViewBox-based zooming for specific regions and drag-to-pan functionality when zoomed in.
     *   **Mouse Wheel Zoom:** Users can zoom in/out using the scroll wheel (dispatches `mapZoom` event to controller).
