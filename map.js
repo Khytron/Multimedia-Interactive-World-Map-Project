@@ -208,9 +208,6 @@ function initializeMap() {
     markersGroup.setAttribute('id', 'svg-markers-group');
     svg.appendChild(markersGroup);
     
-    // Add grid lines for reference
-    addMapGrid(svg);
-    
     // Initialize pan/drag functionality
     initPanDrag(svg);
     
@@ -272,44 +269,7 @@ function createRegionLabel(region) {
     return text;
 }
 
-/**
- * Add decorative grid lines
- */
-function addMapGrid(svg) {
-    const gridGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    gridGroup.setAttribute('id', 'grid-group');
-    gridGroup.setAttribute('opacity', '0.15');
-    
-    // Latitude lines
-    for (let y = 100; y < 600; y += 100) {
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', '0');
-        line.setAttribute('y1', y);
-        line.setAttribute('x2', '1200');
-        line.setAttribute('y2', y);
-        line.setAttribute('stroke', '#F5F0E8');
-        line.setAttribute('stroke-width', '1');
-        line.setAttribute('stroke-dasharray', '5,10');
-        gridGroup.appendChild(line);
-    }
-    
-    // Longitude lines
-    for (let x = 100; x < 1200; x += 100) {
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', x);
-        line.setAttribute('y1', '0');
-        line.setAttribute('x2', x);
-        line.setAttribute('y2', '600');
-        line.setAttribute('stroke', '#F5F0E8');
-        line.setAttribute('stroke-width', '1');
-        line.setAttribute('stroke-dasharray', '5,10');
-        gridGroup.appendChild(line);
-    }
-    
-    // Insert grid below regions
-    const regionsGroup = svg.querySelector('#regions-group');
-    svg.insertBefore(gridGroup, regionsGroup);
-}
+
 
 
 
