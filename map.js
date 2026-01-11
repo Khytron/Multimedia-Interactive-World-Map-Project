@@ -66,3 +66,16 @@ const mapPaths = {
         class: 'asia',
         // No transform for Asia, it matches Africa
     },
+    
+    // Oceania (Australia + surrounding)
+    oceania: {
+        path: `M 860 400 Q 920 390 960 410 Q 975 430 970 470 Q 960 520 920 530 Q 880 540 850 510 Q 830 460 840 430 Q 850 410 860 400 Z
+               M 890 395 Q 900 410 890 420 Q 880 410 890 395 Z
+               M 940 360 Q 980 355 1000 370 Q 990 385 950 380 Q 930 370 940 360 Z
+               M 1060 540 Q 1075 535 1085 550 Q 1070 560 1055 550 Q 1050 545 1060 540 Z
+               M 1045 565 Q 1070 560 1080 580 Q 1060 595 1040 585 Q 1035 575 1045 565 Z`,
+        name: 'Oceania',
+        class: 'australia',
+        transform: 'translate(200, 0)'
+    }
+};
