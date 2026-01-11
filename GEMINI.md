@@ -2,7 +2,7 @@
 
 ## 1. Project Overview
 **Name:** Interactive World Map: Culture & History
-**Purpose:** An educational web application designed to foster spatial-historical literacy. It allows users to explore world history across six key regions and five historical eras (3000 BCE to 2025 CE).
+**Purpose:** An educational web application designed to foster spatial-historical literacy. It allows users to explore world history across six key regions and five historical eras (3000 BC to 2025).
 **Status:** Functional prototype with advanced SVG interactivity.
 
 ## 2. Tech Stack
@@ -26,15 +26,18 @@ The project follows a modular vanilla JavaScript architecture:
     *   Handles UI event listeners (navigation, timeline, modals).
     *   Coordinates between the map and the data.
     *   Initializes the application.
+    *   **Logic:** Renders markers (`createSVGMarker`) based on the current year and era.
 *   **`map.js` (View/Render Engine)**:
     *   Encapsulates all SVG map logic.
     *   Stores SVG path data for regions (`mapPaths`).
     *   Handles map rendering, coloring, and grid generation.
     *   Implements interactions: Zoom, Pan (Drag-to-move), and Click-to-select.
+    *   **Unused Data:** Defines `waterFeatures` (ocean paths) which are currently not rendered.
 *   **`data.js` (Model)**:
     *   Contains static data structures for `regionsData` (metadata, key facts).
     *   Stores `historicalEvents` categorized by era.
-    *   Includes data for cultural achievements and trade routes (though trade routes are currently unused).
+    *   Includes data for `aboriginalCulture` (Dreamtime stories) and `culturalAchievements`.
+    *   **Unused Data:** `tradeRoutes` and `empires` data objects exist but are not currently rendered.
 
 ## 4. Key Features
 *   **Interactive SVG Map:**
@@ -48,12 +51,12 @@ The project follows a modular vanilla JavaScript architecture:
     *   **Zoom & Pan:** ViewBox-based zooming for specific regions and drag-to-pan functionality when zoomed in.
 *   **Timeline System:**
     *   Slider control spanning -3000 to 2025.
-    *   Updates the map "Era" (visual styling) and filters visible event markers.
+    *   Updates the map "Era" (visual styling via CSS filters) and filters visible event markers.
 *   **Region Exploration:**
     *   Clicking a region zooms into it and opens an "Info Panel" with key facts.
     *   Updates the list of visible historical markers to that specific region.
 *   **Historical Markers:**
-    *   SVG-based markers positioned by percentage coordinates.
+    *   SVG-based markers positioned by percentage coordinates (mapped to SVG dimensions).
     *   Clicking a marker opens a "Deep Dive Modal" with detailed history, images, and cultural significance.
 *   **Navigation:**
     *   Button-based navigation for regions.
@@ -82,6 +85,10 @@ The project follows a modular vanilla JavaScript architecture:
 *   **Design Style:** "Window to the Past" (earthy tones, parchment textures).
 *   **Map Logic:** Markers are rendered *inside* the SVG coordinate system to scale correctly with the map.
 *   **Ocean Rendering:** CSS `.water` class set to `transparent`. Map container provides the visible gradient background.
-*   **Path Rendering:** SVG `d` attributes are strict strings; comments inside them have been removed to ensure all islands render correctly.
+*   **Path Rendering:** SVG `d` attributes are strict strings.
 *   **Region Definition:** Explicitly defines 6 regions. "Middle East" is historically grouped under Asia for this project's simplification.
-*   **Unimplemented Data:** `tradeRoutes` and `empires` data objects exist in `data.js` but are not currently rendered or used in the application.
+*   **Unimplemented Data:** 
+    *   `tradeRoutes` (in `data.js`)
+    *   `empires` (in `data.js`)
+    *   `waterFeatures` (in `map.js`)
+    *   Audio playback (commented out in `index.html`)

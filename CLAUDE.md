@@ -46,7 +46,7 @@ An educational interactive web application that allows users to explore world re
    - Includes: Australia, New Zealand (North & South Islands), Papua New Guinea
 
 ### Timeline System
-- Range: 3000 BCE to 2025 CE
+- Range: 3000 BC to 2025
 - 5 Historical Eras:
   - Ancient Era (-3000 to -500)
   - Classical Era (-500 to 500)
@@ -98,7 +98,7 @@ const mapPaths = {
     id: 'event-id',
     region: 'region-class',      // e.g., 'north-america', 'asia'
     title: 'Event Title',
-    year: 1500,                  // negative for BCE
+    year: 1500,                  // negative for BC
     position: { x: 20, y: 40 },  // percentage coordinates (0-100)
     icon: '🏛️',
     description: 'Short description',

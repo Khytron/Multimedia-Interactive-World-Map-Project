@@ -194,7 +194,7 @@ function handleYearChange(e) {
     appState.currentYear = year;
     
     // Update year display
-    const yearText = year < 0 ? `${Math.abs(year)} BCE` : `${year} CE`;
+    const yearText = year < 0 ? `${Math.abs(year)} BC` : `${year}`;
     elements.currentYearDisplay.textContent = yearText;
     
     // Update era
@@ -389,7 +389,7 @@ function openEventModal(event, index) {
     // Set modal content
     elements.modalTitle.textContent = event.title;
     
-    const yearText = event.year < 0 ? `${Math.abs(event.year)} BCE` : `${event.year} CE`;
+    const yearText = event.year < 0 ? `${Math.abs(event.year)} BC` : `${event.year}`;
     elements.modalEra.textContent = yearText;
     
     // Set media (image from images folder, fallback to icon)
@@ -563,7 +563,7 @@ function handleKeyboard(e) {
  * Utility: Format year for display
  */
 function formatYear(year) {
-    return year < 0 ? `${Math.abs(year)} BCE` : `${year} CE`;
+    return year < 0 ? `${Math.abs(year)} BC` : `${year}`;
 }
 
 /**

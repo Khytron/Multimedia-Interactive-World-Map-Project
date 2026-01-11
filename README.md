@@ -6,7 +6,7 @@ An educational interactive web application that allows users to explore world re
 
 - **Interactive World Map**: Click on regions to explore detailed cultural and historical information
 - **Drag-to-Pan Navigation**: Click and drag to pan around the map like Google Maps (desktop and mobile touch supported)
-- **Timeline Slider**: Travel through time from 3000 BCE to present day
+- **Timeline Slider**: Travel through time from 3000 BC to present day
 - **6 World Regions**: North America, South America, Europe, Africa, Asia, and Oceania with unique content
 - **Cultural Markers**: Interactive markers showing historical events and cultural achievements
 - **Deep Dive Modals**: Detailed information about historical events, key figures, and cultural significance
@@ -41,10 +41,10 @@ Interactive World Map Web/
 
 ## Historical Eras
 
-- **Ancient Era** (3000 BCE - 500 BCE): Pyramids, Babylon, Indus Valley, Shang Dynasty
-- **Classical Era** (500 BCE - 500 CE): Greek Democracy, Silk Road, Roman Empire
-- **Medieval Era** (500 - 1500 CE): Islamic Golden Age, Tang Dynasty, Mali Empire, Renaissance
-- **Early Modern Era** (1500 - 1800 CE): Mughal Empire, Ottoman Empire, Edo Japan, Enlightenment
+- **Ancient Era** (3000 BC - 500 BC): Pyramids, Babylon, Indus Valley, Shang Dynasty
+- **Classical Era** (500 BC - 500): Greek Democracy, Silk Road, Roman Empire
+- **Medieval Era** (500 - 1500): Islamic Golden Age, Tang Dynasty, Mali Empire, Renaissance
+- **Early Modern Era** (1500 - 1800): Mughal Empire, Ottoman Empire, Edo Japan, Enlightenment
 - **Modern Era** (1800 - Present): Industrial Revolution, Independence Movements, EU Formation
 
 ## Technical Stack
