@@ -253,7 +253,8 @@ function renderMarkers() {
     
     // Filter events: show only from exact year, visible for 200 years after
     events = events.filter(event => {
-        return appState.currentYear >= event.year && appState.currentYear <= event.year + 200;
+        const range = parseEventRange(event);
+        return appState.currentYear >= range.start && appState.currentYear <= range.end;
     });
     
     appState.filteredEvents = events;
@@ -263,6 +264,61 @@ function renderMarkers() {
         const marker = createSVGMarker(event, index);
         svgMarkersGroup.appendChild(marker);
     });
+}
+
+/**
+ * Helper to parse a year string into a number
+ */
+function parseYear(yearStr) {
+    if (!yearStr) return 0;
+    const str = yearStr.toString().trim().toLowerCase();
+    
+    if (str === 'present') {
+        return new Date().getFullYear();
+    }
+    
+    let year = parseInt(str.replace(/[^0-9]/g, ''));
+    if (isNaN(year)) return 0;
+    
+    if (str.includes('bc')) {
+        return -year;
+    }
+    
+    return year;
+}
+
+/**
+ * Helper to parse an event's timeline string into a range
+ */
+function parseEventRange(event) {
+    // Default fallback if no timeline property
+    if (!event.timeline) {
+        return {
+            start: event.year,
+            end: event.year + 200
+        };
+    }
+    
+    const parts = event.timeline.split('-').map(p => p.trim());
+    
+    if (parts.length === 2) {
+        return {
+            start: parseYear(parts[0]),
+            end: parseYear(parts[1])
+        };
+    } else if (parts.length === 1) {
+        // Single year provided in timeline
+        const start = parseYear(parts[0]);
+        return {
+            start: start,
+            end: start + 200 // Default duration if only start is given
+        };
+    }
+    
+    return {
+        start: event.year,
+        end: event.year + 200
+    };
 }
 
 /**
@@ -394,8 +450,12 @@ function openEventModal(event, index) {
     // Set modal content
     elements.modalTitle.textContent = event.title;
     
-    const yearText = event.year < 0 ? `${Math.abs(event.year)} BC` : `${event.year}`;
-    elements.modalEra.textContent = yearText;
+    if (event.timeline) {
+        elements.modalEra.textContent = event.timeline;
+    } else {
+        const yearText = event.year < 0 ? `${Math.abs(event.year)} BC` : `${event.year}`;
+        elements.modalEra.textContent = yearText;
+    }
     
     // Set media (image from images folder, fallback to icon)
     const imageName = event.title.toLowerCase().replace(/['']/g, "'").replace(/\s+/g, '-');
@@ -408,10 +468,6 @@ function openEventModal(event, index) {
         <h3>Historical Details</h3>
         <p>${event.details}</p>
     `;
-    
-    if (event.timeline) {
-        textHTML += `<h3>Timeline</h3><p>${event.timeline}</p>`;
-    }
     
     if (event.keyFigures && event.keyFigures.length > 0) {
         textHTML += `<h3>Key Figures</h3><p>${event.keyFigures.join(', ')}</p>`;
