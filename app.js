@@ -409,6 +409,10 @@ function openEventModal(event, index) {
         <p>${event.details}</p>
     `;
     
+    if (event.timeline) {
+        textHTML += `<h3>Timeline</h3><p>${event.timeline}</p>`;
+    }
+    
     if (event.keyFigures && event.keyFigures.length > 0) {
         textHTML += `<h3>Key Figures</h3><p>${event.keyFigures.join(', ')}</p>`;
     }

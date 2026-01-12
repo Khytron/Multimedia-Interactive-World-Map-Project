@@ -103,6 +103,7 @@ const historicalEvents = {
         events: [
             {
                 id: 'olmec',
+                timeline: '1200 BC - 400 BC',
                 region: 'north-america',
                 title: 'Olmec Civilization',
                 year: -1500,
@@ -115,6 +116,7 @@ const historicalEvents = {
             },
             {
                 id: 'caral',
+                timeline: '2600 BC - 1800 BC',
                 region: 'south-america',
                 title: 'Caral Civilization',
                 year: -2600,
@@ -127,6 +129,7 @@ const historicalEvents = {
             },
             {
                 id: 'pyramids',
+                timeline: '2600 BC - 2400 BC',
                 region: 'africa',
                 title: 'Great Pyramids of Giza',
                 year: -2560,
@@ -139,6 +142,7 @@ const historicalEvents = {
             },
             {
                 id: 'babylon',
+                timeline: '1894 BC - 539 BC',
                 region: 'asia',
                 title: 'Rise of Babylon',
                 year: -1894,
@@ -151,6 +155,7 @@ const historicalEvents = {
             },
             {
                 id: 'indus-valley',
+                timeline: '3300 BC - 1300 BC',
                 region: 'asia',
                 title: 'Indus Valley Civilization',
                 year: -2600,
@@ -163,6 +168,7 @@ const historicalEvents = {
             },
             {
                 id: 'shang-dynasty',
+                timeline: '1600 BC - 1046 BC',
                 region: 'asia',
                 title: 'Shang Dynasty China',
                 year: -1600,
@@ -183,6 +189,7 @@ const historicalEvents = {
         events: [
             {
                 id: 'maya-classic',
+                timeline: '250 - 900',
                 region: 'north-america',
                 title: 'Maya Civilization Rise',
                 year: -250,
@@ -195,6 +202,7 @@ const historicalEvents = {
             },
             {
                 id: 'nazca-lines',
+                timeline: '500 BC - 500',
                 region: 'south-america',
                 title: 'Nazca Lines Created',
                 year: -100,
@@ -207,6 +215,7 @@ const historicalEvents = {
             },
             {
                 id: 'teotihuacan',
+                timeline: '100 BC - 650',
                 region: 'north-america',
                 title: 'Teotihuacan Peak',
                 year: 450,
@@ -219,6 +228,7 @@ const historicalEvents = {
             },
             {
                 id: 'greek-democracy',
+                timeline: '508 BC - 322 BC',
                 region: 'europe',
                 title: 'Athenian Democracy',
                 year: -508,
@@ -231,6 +241,7 @@ const historicalEvents = {
             },
             {
                 id: 'silk-road',
+                timeline: '130 BC - 1453',
                 region: 'asia',
                 title: 'Silk Road Established',
                 year: -130,
@@ -243,6 +254,7 @@ const historicalEvents = {
             },
             {
                 id: 'roman-empire',
+                timeline: '27 BC - 476',
                 region: 'europe',
                 title: 'Roman Empire Peak',
                 year: 117,
@@ -255,6 +267,7 @@ const historicalEvents = {
             },
             {
                 id: 'aksum-empire',
+                timeline: '100 - 940',
                 region: 'africa',
                 title: 'Aksumite Empire',
                 year: 100,
@@ -267,6 +280,7 @@ const historicalEvents = {
             },
             {
                 id: 'maurya-empire',
+                timeline: '322 BC - 185 BC',
                 region: 'asia',
                 title: 'Maurya Empire',
                 year: -268,
@@ -287,6 +301,7 @@ const historicalEvents = {
         events: [
             {
                 id: 'maya-collapse',
+                timeline: '800 - 950',
                 region: 'north-america',
                 title: 'Maya Classic Collapse',
                 year: 900,
@@ -299,6 +314,7 @@ const historicalEvents = {
             },
             {
                 id: 'tiwanaku',
+                timeline: '550 - 1000',
                 region: 'south-america',
                 title: 'Tiwanaku Empire',
                 year: 800,
@@ -311,6 +327,7 @@ const historicalEvents = {
             },
             {
                 id: 'cahokia',
+                timeline: '800 - 1400',
                 region: 'north-america',
                 title: 'Cahokia Mounds',
                 year: 1100,
@@ -323,6 +340,7 @@ const historicalEvents = {
             },
             {
                 id: 'chimu-empire',
+                timeline: '900 - 1470',
                 region: 'south-america',
                 title: 'Chimú Empire',
                 year: 1300,
@@ -335,6 +353,7 @@ const historicalEvents = {
             },
             {
                 id: 'islamic-golden-age',
+                timeline: '786 - 1258',
                 region: 'asia',
                 title: 'Islamic Golden Age',
                 year: 800,
@@ -347,6 +366,7 @@ const historicalEvents = {
             },
             {
                 id: 'tang-dynasty',
+                timeline: '618 - 907',
                 region: 'asia',
                 title: 'Tang Dynasty Golden Age',
                 year: 700,
@@ -359,6 +379,7 @@ const historicalEvents = {
             },
             {
                 id: 'mali-empire',
+                timeline: '1235 - 1670',
                 region: 'africa',
                 title: 'Mali Empire',
                 year: 1312,
@@ -371,6 +392,7 @@ const historicalEvents = {
             },
             {
                 id: 'mongol-empire',
+                timeline: '1206 - 1368',
                 region: 'asia',
                 title: 'Mongol Empire',
                 year: 1260,
@@ -383,6 +405,7 @@ const historicalEvents = {
             },
             {
                 id: 'great-zimbabwe',
+                timeline: '1100 - 1450',
                 region: 'africa',
                 title: 'Great Zimbabwe',
                 year: 1100,
@@ -395,6 +418,7 @@ const historicalEvents = {
             },
             {
                 id: 'renaissance',
+                timeline: '1400 - 1600',
                 region: 'europe',
                 title: 'Italian Renaissance',
                 year: 1450,
@@ -415,6 +439,7 @@ const historicalEvents = {
         events: [
             {
                 id: 'aztec-empire',
+                timeline: '1428 - 1521',
                 region: 'north-america',
                 title: 'Aztec Empire Peak',
                 year: 1500,
@@ -427,6 +452,7 @@ const historicalEvents = {
             },
             {
                 id: 'inca-empire',
+                timeline: '1438 - 1533',
                 region: 'south-america',
                 title: 'Inca Empire',
                 year: 1500,
@@ -439,6 +465,7 @@ const historicalEvents = {
             },
             {
                 id: 'spanish-conquest',
+                timeline: '1519 - 1521',
                 region: 'north-america',
                 title: 'Spanish Conquest',
                 year: 1521,
@@ -451,6 +478,7 @@ const historicalEvents = {
             },
             {
                 id: 'colonial-brazil',
+                timeline: '1500 - 1815',
                 region: 'south-america',
                 title: 'Colonial Brazil',
                 year: 1600,
@@ -463,6 +491,7 @@ const historicalEvents = {
             },
             {
                 id: 'us-independence',
+                timeline: '1775 - 1783',
                 region: 'north-america',
                 title: 'American Revolution',
                 year: 1776,
@@ -475,6 +504,7 @@ const historicalEvents = {
             },
             {
                 id: 'mughal-empire',
+                timeline: '1526 - 1857',
                 region: 'asia',
                 title: 'Mughal Empire',
                 year: 1600,
@@ -487,6 +517,7 @@ const historicalEvents = {
             },
             {
                 id: 'ottoman-empire',
+                timeline: '1299 - 1922',
                 region: 'asia',
                 title: 'Ottoman Empire Peak',
                 year: 1550,
@@ -499,6 +530,7 @@ const historicalEvents = {
             },
             {
                 id: 'edo-japan',
+                timeline: '1603 - 1867',
                 region: 'asia',
                 title: 'Edo Period Japan',
                 year: 1700,
@@ -511,6 +543,7 @@ const historicalEvents = {
             },
             {
                 id: 'enlightenment',
+                timeline: '1715 - 1789',
                 region: 'europe',
                 title: 'Age of Enlightenment',
                 year: 1750,
@@ -523,6 +556,7 @@ const historicalEvents = {
             },
             {
                 id: 'aboriginal-contact',
+                timeline: '1770 - 1901',
                 region: 'australia',
                 title: 'First European Contact',
                 year: 1770,
@@ -543,6 +577,7 @@ const historicalEvents = {
         events: [
             {
                 id: 'latin-independence',
+                timeline: '1808 - 1833',
                 region: 'south-america',
                 title: 'South American Independence',
                 year: 1820,
@@ -555,6 +590,7 @@ const historicalEvents = {
             },
             {
                 id: 'mexican-revolution',
+                timeline: '1910 - 1920',
                 region: 'north-america',
                 title: 'Mexican Revolution',
                 year: 1910,
@@ -567,6 +603,7 @@ const historicalEvents = {
             },
             {
                 id: 'civil-rights',
+                timeline: '1954 - 1968',
                 region: 'north-america',
                 title: 'Civil Rights Movement',
                 year: 1963,
@@ -579,6 +616,7 @@ const historicalEvents = {
             },
             {
                 id: 'brazilian-growth',
+                timeline: '2000 - Present',
                 region: 'south-america',
                 title: 'Brazil\'s Rise',
                 year: 2000,
@@ -591,6 +629,7 @@ const historicalEvents = {
             },
             {
                 id: 'industrial-revolution',
+                timeline: '1760 - 1840',
                 region: 'europe',
                 title: 'Industrial Revolution',
                 year: 1850,
@@ -603,6 +642,7 @@ const historicalEvents = {
             },
             {
                 id: 'meiji-restoration',
+                timeline: '1868 - 1912',
                 region: 'asia',
                 title: 'Meiji Restoration',
                 year: 1868,
@@ -615,6 +655,7 @@ const historicalEvents = {
             },
             {
                 id: 'berlin-conference',
+                timeline: '1881 - 1914',
                 region: 'africa',
                 title: 'Scramble for Africa',
                 year: 1884,
@@ -627,6 +668,7 @@ const historicalEvents = {
             },
             {
                 id: 'indian-independence',
+                timeline: '1857 - 1947',
                 region: 'asia',
                 title: 'Indian Independence',
                 year: 1947,
@@ -639,6 +681,7 @@ const historicalEvents = {
             },
             {
                 id: 'african-independence',
+                timeline: '1957 - 1975',
                 region: 'africa',
                 title: 'African Independence',
                 year: 1960,
@@ -651,6 +694,7 @@ const historicalEvents = {
             },
             {
                 id: 'eu-formation',
+                timeline: '1993 - Present',
                 region: 'europe',
                 title: 'European Union',
                 year: 1993,
@@ -663,6 +707,7 @@ const historicalEvents = {
             },
             {
                 id: 'aboriginal-apology',
+                timeline: '2008 - Present',
                 region: 'australia',
                 title: 'National Apology',
                 year: 2008,
@@ -675,6 +720,7 @@ const historicalEvents = {
             },
             {
                 id: 'china-rise',
+                timeline: '1978 - Present',
                 region: 'asia',
                 title: 'China\'s Economic Rise',
                 year: 2010,
