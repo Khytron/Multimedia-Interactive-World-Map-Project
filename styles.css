@@ -944,3 +944,54 @@ a:focus {
         height: 100vh;
     }
 }
+
+/* ============================================
+   TEMPORARY GRID OVERLAY STYLES
+   Remove this section when done positioning markers
+   ============================================ */
+
+/* X-axis labels (below timeline) */
+.grid-x-axis {
+    position: fixed;
+    bottom: 100px;
+    left: 100px;
+    right: 100px;
+    height: 25px;
+    background: rgba(244, 228, 188, 0.95);
+    border-top: 2px solid var(--gold);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+}
+
+.grid-x-axis span {
+    position: absolute;
+    transform: translateX(-50%);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--dark-brown);
+}
+
+/* Y-axis labels (right of compass in left sidebar) */
+.grid-y-axis {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 5px;
+    width: 25px;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+.grid-y-axis span {
+    position: absolute;
+    transform: translateY(-50%);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--cream);
+    text-align: right;
+    width: 20px;
+}

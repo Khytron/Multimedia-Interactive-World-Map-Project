@@ -61,7 +61,8 @@ An educational interactive web application that allows users to explore world re
 - **Filtering** - World view shows all markers; continent view filters to that region
 - **Modals** - Deep dive info with key figures, cultural significance
 - **Info Panel** - Region overview with key facts and cultural achievements
-- **Keyboard Navigation** - Number keys (1-6) to select regions, 7 for world view
+- **Keyboard Navigation** - Number keys (1-7) for navigation: 1=World, 2-7=Regions
+- **Wheel Zoom** - Mouse wheel zooms in/out on the map
 
 ## Design Decisions
 
@@ -77,6 +78,7 @@ An educational interactive web application that allows users to explore world re
 - **Continent paths**: Clean, closed polygons with accurate coastlines
 - **Multi-part regions**: Some continents use multiple path segments (e.g., islands)
 - **Label positions**: Centered on each continent's visual mass
+- **Coordinate transforms**: Paths use `translate(100, -70)` transform for positioning
 
 ### Map Path Structure (in `map.js`)
 ```javascript
@@ -84,7 +86,8 @@ const mapPaths = {
     northAmerica: {
         path: "M ... Z M ... Z",  // Multiple closed paths for mainland + islands
         name: 'North America',
-        class: 'north-america'
+        class: 'north-america',
+        transform: 'translate(100, -70)'
     },
     // ... other regions
 };
@@ -107,6 +110,11 @@ const mapPaths = {
     culturalSignificance: 'Why it matters'
 }
 ```
+
+### Marker Position System
+- Markers use percentage-based coordinates (0-100 for both x and y)
+- Converted to SVG coordinates: `svgX = (x / 100) * 1200`, `svgY = (y / 100) * 600`
+- This allows markers to be positioned relative to the map regardless of zoom level
 
 ### Region Data (in `data.js`)
 ```javascript
@@ -148,5 +156,18 @@ const mapPaths = {
 - Merged Middle East into Asia (reduced from 7 to 6 regions)
 - Added drag-to-pan navigation (left-click drag when zoomed)
 - Improved continent shapes with accurate SVG paths traced from reference image
-- Updated keyboard shortcuts (1-6 for regions, 7 for world view)
+- Updated keyboard shortcuts (1-7 for navigation)
 - Added historical event images in `/images` folder
+- Added wheel zoom functionality for mouse scroll
+- Added temporary grid overlay for marker positioning (toggle with `toggleGrid()` in console)
+
+## Developer Tools
+
+### Temporary Grid Overlay
+To help with manual marker positioning, a grid overlay is available:
+- **Enable/Disable**: Call `toggleGrid()` in browser console
+- **Grid**: Shows lines at every 5% interval (0, 5, 10, ... 100)
+- **X-axis labels**: Displayed below the timeline
+- **Y-axis labels**: Displayed to the right of the compass
+- **Purpose**: Helps estimate marker positions in percentage coordinates
+- **Removal**: To permanently remove, delete the grid-related code in `map.js` and `styles.css`
