@@ -148,6 +148,11 @@ function initializeMap() {
     
     const regionsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     regionsGroup.setAttribute('id', 'regions-group');
+
+    // Create markers group inside SVG for proper scaling
+    const markersGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    markersGroup.setAttribute('id', 'svg-markers-group');
+    
     
     const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     labelsGroup.setAttribute('id', 'labels-group');
@@ -182,18 +187,19 @@ function initializeMap() {
     
     svg.appendChild(landGroup);
     svg.appendChild(regionsGroup);
+    svg.appendChild(markersGroup);
     svg.appendChild(labelsGroup);
     
-    // Create markers group inside SVG for proper scaling
-    const markersGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    markersGroup.setAttribute('id', 'svg-markers-group');
-    svg.appendChild(markersGroup);
+    
     
     // Initialize pan/drag functionality
     initPanDrag(svg);
     
     // Initialize wheel zoom
     initWheelZoom(svg);
+    
+    // Show grid overlay by default (for marker positioning)
+    // toggleGrid();
 }
 
 // Grid overlay state
