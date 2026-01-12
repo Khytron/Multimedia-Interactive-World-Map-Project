@@ -53,7 +53,7 @@ The project follows a modular vanilla JavaScript architecture:
     *   Slider control spanning -3000 to 2025.
     *   Updates the map "Era" (visual styling via CSS filters) and filters visible event markers.
 *   **Region Exploration:**
-    *   Clicking a region zooms into it and opens an "Info Panel" with key facts.
+    *   Clicking a region zooms into it and opens an "Info Panel" with a representative image, description, and key facts.
     *   Updates the list of visible historical markers to that specific region.
 *   **Historical Markers:**
     *   SVG-based markers positioned by percentage coordinates (mapped to SVG dimensions).

@@ -346,7 +346,12 @@ function showInfoPanel(regionData) {
     appState.panelOpen = true;
     
     elements.panelTitle.textContent = regionData.name;
-    elements.panelImage.innerHTML = `<span style="font-size: 4rem;">${regionData.icon}</span>`;
+    
+    // Set region image (from images folder, fallback to icon)
+    const imageName = regionData.name.toLowerCase().replace(/\s+/g, '-');
+    const imagePath = `images/${imageName}.png`;
+    elements.panelImage.innerHTML = `<img src="${imagePath}" alt="${regionData.name}" onerror="this.parentElement.innerHTML='<span style=\\'font-size: 4rem;\\'>${regionData.icon}</span>';">`;
+    
     elements.panelDescription.textContent = regionData.description;
     
     // Build key facts list
