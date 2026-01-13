@@ -333,7 +333,13 @@ function createSVGMarker(event, index) {
     // Create marker group
     const markerGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     markerGroup.setAttribute('class', 'svg-marker');
-    markerGroup.setAttribute('transform', `translate(${svgX}, ${svgY})`);
+    
+    // Apply inverse scale to keep marker size relatively constant relative to screen
+    // We add a small growth factor (0.1) so it gets a tiny bit bigger when zoomed in
+    const growthFactor = 0.1;
+    const scale = (1 + (appState.zoomLevel - 1) * growthFactor) / appState.zoomLevel;
+    markerGroup.setAttribute('transform', `translate(${svgX}, ${svgY}) scale(${scale})`);
+    
     markerGroup.setAttribute('data-event-id', event.id);
     markerGroup.setAttribute('data-index', index);
     markerGroup.style.cursor = 'pointer';
@@ -526,12 +532,13 @@ function updateModalNavigation() {
 function handleZoom(direction) {
     const step = 0.25;
     const minZoom = 1;
-    const maxZoom = 3;
+    const maxZoom = 10;
     
     appState.zoomLevel += direction * step;
     appState.zoomLevel = Math.max(minZoom, Math.min(maxZoom, appState.zoomLevel));
     
     applyZoom(appState.zoomLevel);
+    renderMarkers(); // Re-render markers to update their scale
 }
 
 /**
