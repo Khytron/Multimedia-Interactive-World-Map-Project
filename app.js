@@ -438,6 +438,11 @@ function showInfoPanel(regionData) {
 function closeInfoPanel() {
     appState.panelOpen = false;
     elements.infoPanel.classList.add('hidden');
+    
+    // If we are in a region view, go back to world view
+    if (appState.currentView !== 'world') {
+        handleResetView();
+    }
 }
 
 /**
