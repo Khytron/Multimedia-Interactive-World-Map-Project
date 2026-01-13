@@ -428,6 +428,19 @@ const historicalEvents = {
                 details: 'Artists like Leonardo da Vinci and Michelangelo created masterpieces. The printing press revolutionized the spread of knowledge.',
                 keyFigures: ['Leonardo da Vinci', 'Michelangelo', 'Botticelli'],
                 culturalSignificance: 'Foundation of modern Western art and humanist philosophy.'
+            },
+            {
+                id: 'majapahit',
+                timeline: '1292 - 1527',
+                region: 'asia',
+                title: 'Majapahit Empire',
+                year: 1292,
+                position: { x: 73, y: 66 },
+                icon: '🌴',
+                description: 'The Majapahit Empire was a powerful maritime empire based in East Java that controlled much of the Indonesian archipelago.',
+                details: 'Reaching its peak under Hayam Wuruk and his prime minister Gajah Mada, Majapahit controlled key spice trade routes. Its capital, Trowulan, was a center of art and literature. The empire declined with the rise of Islamic trading states.',
+                keyFigures: ['Raden Wijaya', 'Hayam Wuruk', 'Gajah Mada'],
+                culturalSignificance: 'Considered one of the greatest states in Indonesian history and a symbol of national unity.'
             }
         ]
     },
@@ -730,6 +743,19 @@ const historicalEvents = {
                 details: 'Since opening up in 1978, China lifted over 800 million people out of poverty and became a major global manufacturing hub.',
                 keyFigures: ['Deng Xiaoping', 'Xi Jinping'],
                 culturalSignificance: 'Return of China as a major world power.'
+            },
+            {
+                id: 'malaysia-independence',
+                timeline: '1957 - Present',
+                region: 'asia',
+                title: 'Malaysia\'s Independence Day',
+                year: 1957,
+                position: { x: 73, y: 64 },
+                icon: '🇲🇾',
+                description: 'Malaysia achieved independence from the British Empire',
+                details: 'On the night of 30 August 1957, more than 20,000 people gathered at Merdeka Square (Dataran Merdeka) in Kuala Lumpur to witness the handover of power from the British',
+                keyFigures: ['Tunku Abdul Rahman Putra Al-Haj', 'Tun Dato Sri Tan Cheng Lock', 'Tun V. T. Sambanthan'],
+                culturalSignificance: 'End of colonial era and birth of Malaysia as it is today'
             }
         ]
     }
