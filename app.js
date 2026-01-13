@@ -164,6 +164,7 @@ function setupEventListeners() {
  */
 function handleNavigation(view) {
     appState.currentView = view;
+    appState.zoomLevel = 1; // Reset zoom level when changing views
     
     // Update active nav button
     elements.navButtons.forEach(btn => {

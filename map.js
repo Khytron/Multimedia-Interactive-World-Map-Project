@@ -6,6 +6,7 @@
 // Current map state
 let currentMapView = 'world';
 let mapTransform = { scale: 1, x: 0, y: 0 };
+let baseViewBox = { x: 0, y: 0, width: 1200, height: 600 };
 
 // Pan/drag state
 let isPanning = false;
@@ -460,6 +461,9 @@ function zoomToRegion(regionId, viewBox) {
     currentMapView = regionId;
     const { x, y, width, height } = viewBox;
     
+    // Set base view box for relative zooming
+    baseViewBox = { x, y, width, height };
+    
     // Animate viewBox change
     svg.style.transition = 'none';
     svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
@@ -482,6 +486,7 @@ function resetMapView() {
     if (!svg) return;
     
     currentMapView = 'world';
+    baseViewBox = { x: 0, y: 0, width: 1200, height: 600 };
     svg.setAttribute('viewBox', '0 0 1200 600');
     mapTransform = { scale: 1, x: 0, y: 0, width: 1200, height: 600 };
     resetRegionHighlights();
@@ -491,21 +496,34 @@ function resetMapView() {
  * Apply zoom level to map (for zoom buttons)
  */
 function applyZoom(level) {
-    // Zoom buttons are disabled in region view
-    if (currentMapView !== 'world') return;
-    
     const svg = document.getElementById('world-map');
     if (!svg) return;
     
-    const centerX = 600;
-    const centerY = 300;
-    const newWidth = 1200 / level;
-    const newHeight = 600 / level;
-    const newX = centerX - newWidth / 2;
-    const newY = centerY - newHeight / 2;
+    // Get current viewBox
+    const currentViewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+    const currentX = currentViewBox[0];
+    const currentY = currentViewBox[1];
+    const currentWidth = currentViewBox[2];
+    const currentHeight = currentViewBox[3];
     
-    svg.setAttribute('viewBox', `${Math.max(0, newX)} ${Math.max(0, newY)} ${newWidth} ${newHeight}`);
-    mapTransform = { scale: level, x: Math.max(0, newX), y: Math.max(0, newY), width: newWidth, height: newHeight };
+    // Calculate current center
+    const centerX = currentX + currentWidth / 2;
+    const centerY = currentY + currentHeight / 2;
+    
+    // Calculate new dimensions relative to the base view
+    const newWidth = baseViewBox.width / level;
+    const newHeight = baseViewBox.height / level;
+    
+    // Calculate new origin to keep center stable
+    let newX = centerX - newWidth / 2;
+    let newY = centerY - newHeight / 2;
+    
+    // Clamp to boundaries
+    newX = Math.max(0, Math.min(1200 - newWidth, newX));
+    newY = Math.max(0, Math.min(600 - newHeight, newY));
+    
+    svg.setAttribute('viewBox', `${newX} ${newY} ${newWidth} ${newHeight}`);
+    mapTransform = { scale: level, x: newX, y: newY, width: newWidth, height: newHeight };
 }
 
 /**
