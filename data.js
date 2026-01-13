@@ -822,97 +822,12 @@ const culturalAchievements = {
     ]
 };
 
-// Trade routes data for visualization
-const tradeRoutes = {
-    silkRoad: {
-        name: 'Silk Road',
-        period: [-130, 1450],
-        color: '#C9A227',
-        description: 'Ancient network of trade routes connecting the East and West',
-        path: [
-            { x: 78, y: 35, name: "Xi'an (Chang'an)" },
-            { x: 72, y: 33, name: 'Dunhuang' },
-            { x: 68, y: 35, name: 'Samarkand' },
-            { x: 58, y: 35, name: 'Baghdad' },
-            { x: 50, y: 32, name: 'Constantinople' },
-            { x: 42, y: 30, name: 'Rome' }
-        ]
-    },
-    transaharan: {
-        name: 'Trans-Saharan Trade',
-        period: [300, 1600],
-        color: '#27AE60',
-        description: 'Trade routes crossing the Sahara Desert',
-        path: [
-            { x: 38, y: 48, name: 'Timbuktu' },
-            { x: 36, y: 42, name: 'Sijilmasa' },
-            { x: 38, y: 38, name: 'Fez' }
-        ]
-    },
-    spiceRoute: {
-        name: 'Spice Route',
-        period: [100, 1800],
-        color: '#E74C3C',
-        description: 'Maritime route connecting Asia to Europe via the Indian Ocean',
-        path: [
-            { x: 85, y: 55, name: 'Malacca' },
-            { x: 72, y: 52, name: 'Calicut' },
-            { x: 55, y: 45, name: 'Aden' },
-            { x: 50, y: 42, name: 'Cairo' },
-            { x: 42, y: 30, name: 'Venice' }
-        ]
-    }
-};
-
-// Empires data for timeline visualization
-const empires = {
-    roman: {
-        name: 'Roman Empire',
-        period: [-27, 476],
-        region: 'europe',
-        color: '#8B0000',
-        maxExtent: 117
-    },
-    han: {
-        name: 'Han Dynasty',
-        period: [-206, 220],
-        region: 'asia',
-        color: '#FFD700'
-    },
-    mongol: {
-        name: 'Mongol Empire',
-        period: [1206, 1368],
-        region: 'asia',
-        color: '#4169E1'
-    },
-    ottoman: {
-        name: 'Ottoman Empire',
-        period: [1299, 1922],
-        region: 'asia',
-        color: '#006400'
-    },
-    mali: {
-        name: 'Mali Empire',
-        period: [1235, 1600],
-        region: 'africa',
-        color: '#FFD700'
-    },
-    mughal: {
-        name: 'Mughal Empire',
-        period: [1526, 1857],
-        region: 'asia',
-        color: '#9932CC'
-    }
-};
-
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         regionsData,
         historicalEvents,
         aboriginalCulture,
-        culturalAchievements,
-        tradeRoutes,
-        empires
+        culturalAchievements
     };
 }

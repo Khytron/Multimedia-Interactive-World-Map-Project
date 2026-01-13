@@ -66,30 +66,6 @@ const mapPaths = {
     }
 };
 
-// Ocean and water features
-const waterFeatures = {
-    atlanticOcean: {
-        path: `M 0 0 L 330 0 L 320 150 L 280 300 L 200 400 L 150 550 L 0 600 Z`,
-        name: 'Atlantic Ocean'
-    },
-    pacificOcean: {
-        path: `M 950 0 L 1200 0 L 1200 600 L 1000 600 L 1050 400 L 1000 200 L 970 100 Z`,
-        name: 'Pacific Ocean'
-    },
-    indianOcean: {
-        path: `M 500 300 L 600 280 L 750 320 L 800 400 L 750 500 L 600 520 L 500 480 L 480 400 Z`,
-        name: 'Indian Ocean'
-    },
-    arcticOcean: {
-        path: `M 200 0 L 900 0 L 900 40 L 200 40 Z`,
-        name: 'Arctic Ocean'
-    },
-    mediterraneanSea: {
-        path: `M 360 170 L 440 165 L 480 175 L 470 195 L 400 200 L 360 190 Z`,
-        name: 'Mediterranean Sea'
-    }
-};
-
 /**
  * Initialize the SVG world map
  */
