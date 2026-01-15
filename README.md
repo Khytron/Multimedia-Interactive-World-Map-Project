@@ -22,7 +22,6 @@ Interactive World Map Web/
 ├── app.js              # Main application logic
 ├── map.js              # SVG map generation and rendering
 ├── data.js             # Historical and cultural data
-├── audio/              # Audio files for ambient sounds
 ├── images/             # Image assets
 └── README.md           # This file
 ```
@@ -74,7 +73,7 @@ Following the research specifications:
 
 This project was created as part of the FOM Interactive World Map educational initiative.
 
-© 2025 Interactive World Map Project
+© 2026 Interactive World Map Project
 
 ---
 
