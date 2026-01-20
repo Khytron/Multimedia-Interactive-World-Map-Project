@@ -124,33 +124,6 @@ body {
     50% { transform: scale(1.1); }
 }
 
-/* Loading Spinner for Images */
-.image-loading-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--light-brown);
-}
-
-.image-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top: 4px solid var(--gold);
-    animation: spin 1s linear infinite;
-    position: absolute;
-    z-index: 10;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 /* Header */
 #main-header {
     position: fixed;

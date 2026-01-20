@@ -42,32 +42,27 @@ function initApp() {
     // Get progress bar element
     const progressBar = document.querySelector('.loading-progress');
     
-    // 1. Critical Preload (Regions only) - Fast start
-    preloadCriticalImages((progress) => {
+    // Preload images with progress tracking
+    preloadImages((progress) => {
         if (progressBar) {
             progressBar.style.width = `${progress}%`;
         }
     }).then(() => {
-        // Hide loading screen quickly
+        // Hide loading screen after all images are loaded
         setTimeout(() => {
             document.getElementById('loading-screen').classList.add('hidden');
-            
-            // 2. Background Preload (All events) - Lazy load
-            // Give the browser a moment to render the UI first
-            setTimeout(() => {
-                preloadEventImagesBackground();
-            }, 1000);
-            
-        }, 500);
+        }, 500); // Small delay to let user see 100%
         console.log('Interactive World Map initialized successfully!');
     });
 }
 
 /**
- * Preload only critical region images for fast startup
+ * Preload all images to ensure fast loading
+ * @param {Function} onProgress - Callback for progress updates (0-100)
+ * @returns {Promise} Resolves when all images are loaded (or failed)
  */
-function preloadCriticalImages(onProgress) {
-    console.log('Preloading critical images...');
+function preloadImages(onProgress) {
+    console.log('Preloading images...');
     return new Promise((resolve) => {
         const imagesToLoad = [];
         
@@ -77,8 +72,45 @@ function preloadCriticalImages(onProgress) {
             imagesToLoad.push(`images/${imageName}.png`);
         });
         
+        // Preload event images
+        Object.values(historicalEvents).forEach(era => {
+            if (era.events) {
+                era.events.forEach(event => {
+                    // Use same replacement logic as openEventModal
+                    const imageName = event.title.toLowerCase().replace(/['']/g, "'").replace(/\s+/g, '-');
+                    imagesToLoad.push(`images/${imageName}.png`);
+                });
+            }
+        });
+
+        // Add specific event images that might have unique naming or just to be safe
+        // (This list matches what we found in the file structure)
+        const extraImages = [
+            'images/african-independence.png', 'images/age-of-enlightenment.png', 'images/aksumite-empire.png', 
+            'images/american-revolution.png', 'images/athenian-democracy.png', 'images/aztec-empire-peak.png',
+            "images/brazil's-rise.png", 'images/cahokia-mounds.png', 'images/caral-civilization.png',
+            'images/chimú-empire.png', "images/china's-economic-rise.png", 'images/civil-rights-movement.png',
+            'images/colonial-brazil.png', 'images/edo-period-japan.png', 'images/european-union.png',
+            'images/first-european-contact.png', 'images/great-pyramids-of-giza.png', 'images/great-zimbabwe.png',
+            'images/inca-empire.png', 'images/indian-independence.png', 'images/indus-valley-civilization.png',
+            'images/industrial-revolution.png', 'images/islamic-golden-age.png', 'images/italian-renaissance.png',
+            'images/majapahit-empire.png', "images/malaysia's-independence-day.png", 'images/mali-empire.png',
+            'images/maurya-empire.png', 'images/maya-civilization-rise.png', 'images/maya-classic-collapse.png',
+            'images/meiji-restoration.png', 'images/mexican-revolution.png', 'images/mongol-empire.png',
+            'images/mughal-empire.png', 'images/national-apology.png', 'images/nazca-lines-created.png',
+            'images/olmec-civilization.png', 'images/ottoman-empire-peak.png', 'images/rise-of-babylon.png',
+            'images/roman-empire-peak.png', 'images/scramble-for-africa.png', 'images/shang-dynasty-china.png',
+            'images/silk-road-established.png', 'images/south-american-independence.png', 'images/spanish-conquest.png',
+            'images/tang-dynasty-golden-age.png', 'images/teotihuacan-peak.png', 'images/tiwanaku-empire.png'
+        ];
+        
+        // Merge and deduplicate
+        const uniqueImages = [...new Set([...imagesToLoad, ...extraImages])];
+        
         let loadedCount = 0;
-        const totalImages = imagesToLoad.length;
+        const totalImages = uniqueImages.length;
+        
+        console.log(`Starting preload of ${totalImages} unique images.`);
         
         if (totalImages === 0) {
             if (onProgress) onProgress(100);
@@ -86,69 +118,32 @@ function preloadCriticalImages(onProgress) {
             return;
         }
 
-        imagesToLoad.forEach(src => {
+        uniqueImages.forEach(src => {
             const img = new Image();
-            img.onload = img.onerror = () => {
+            
+            img.onload = () => {
                 loadedCount++;
                 const percent = Math.floor((loadedCount / totalImages) * 100);
                 if (onProgress) onProgress(percent);
-                if (loadedCount === totalImages) resolve();
+                if (loadedCount === totalImages) {
+                    console.log('All images preloaded.');
+                    resolve();
+                }
             };
+            
+            img.onerror = () => {
+                console.warn(`Failed to preload image: ${src}`);
+                loadedCount++; // Count errors as "processed" so we don't hang
+                const percent = Math.floor((loadedCount / totalImages) * 100);
+                if (onProgress) onProgress(percent);
+                if (loadedCount === totalImages) {
+                    console.log('All images processed (with some errors).');
+                    resolve();
+                }
+            };
+            
             img.src = src;
         });
-    });
-}
-
-/**
- * Preload event images in the background without blocking UI
- */
-function preloadEventImagesBackground() {
-    console.log('Starting background image preload...');
-    
-    const imagesToLoad = [];
-    
-    // Collect all event images
-    Object.values(historicalEvents).forEach(era => {
-        if (era.events) {
-            era.events.forEach(event => {
-                const imageName = event.title.toLowerCase().replace(/['']/g, "'").replace(/\s+/g, '-');
-                imagesToLoad.push(`images/${imageName}.png`);
-            });
-        }
-    });
-
-    // Add extra known images to be safe
-    const extraImages = [
-        'images/african-independence.png', 'images/age-of-enlightenment.png', 'images/aksumite-empire.png', 
-        'images/american-revolution.png', 'images/athenian-democracy.png', 'images/aztec-empire-peak.png',
-        "images/brazil's-rise.png", 'images/cahokia-mounds.png', 'images/caral-civilization.png',
-        'images/chimú-empire.png', "images/china's-economic-rise.png", 'images/civil-rights-movement.png',
-        'images/colonial-brazil.png', 'images/edo-period-japan.png', 'images/european-union.png',
-        'images/first-european-contact.png', 'images/great-pyramids-of-giza.png', 'images/great-zimbabwe.png',
-        'images/inca-empire.png', 'images/indian-independence.png', 'images/indus-valley-civilization.png',
-        'images/industrial-revolution.png', 'images/islamic-golden-age.png', 'images/italian-renaissance.png',
-        'images/majapahit-empire.png', "images/malaysia's-independence-day.png", 'images/mali-empire.png',
-        'images/maurya-empire.png', 'images/maya-civilization-rise.png', 'images/maya-classic-collapse.png',
-        'images/meiji-restoration.png', 'images/mexican-revolution.png', 'images/mongol-empire.png',
-        'images/mughal-empire.png', 'images/national-apology.png', 'images/nazca-lines-created.png',
-        'images/olmec-civilization.png', 'images/ottoman-empire-peak.png', 'images/rise-of-babylon.png',
-        'images/roman-empire-peak.png', 'images/scramble-for-africa.png', 'images/shang-dynasty-china.png',
-        'images/silk-road-established.png', 'images/south-american-independence.png', 'images/spanish-conquest.png',
-        'images/tang-dynasty-golden-age.png', 'images/teotihuacan-peak.png', 'images/tiwanaku-empire.png'
-    ];
-    
-    const uniqueImages = [...new Set([...imagesToLoad, ...extraImages])];
-    
-    // Load them sequentially or in small batches to not kill the network
-    // We'll just trigger them all but they are low priority now since UI is up
-    let loaded = 0;
-    uniqueImages.forEach(src => {
-        const img = new Image();
-        img.onload = img.onerror = () => {
-            loaded++;
-            if (loaded === uniqueImages.length) console.log('Background preload complete.');
-        };
-        img.src = src;
     });
 }
 
@@ -515,17 +510,10 @@ function showInfoPanel(regionData) {
     
     elements.panelTitle.textContent = regionData.name;
     
-    // Set region image with loading spinner
+    // Set region image (from images folder, fallback to icon)
     const imageName = regionData.name.toLowerCase().replace(/\s+/g, '-');
     const imagePath = `images/${imageName}.png`;
-    
-    // Create image container with spinner
-    elements.panelImage.innerHTML = `
-        <div class="image-loading-container">
-            <div class="image-spinner"></div>
-            <img src="${imagePath}" alt="${regionData.name}" style="display: none;" onload="this.style.display='block'; this.previousElementSibling.style.display='none';" onerror="this.parentElement.innerHTML='<span style=\\'font-size: 4rem;\\'>${regionData.icon}</span>';">
-        </div>
-    `;
+    elements.panelImage.innerHTML = `<img src="${imagePath}" alt="${regionData.name}" onerror="this.parentElement.innerHTML='<span style=\\'font-size: 4rem;\\'>${regionData.icon}</span>';">`;
     
     elements.panelDescription.textContent = regionData.description;
     
@@ -581,16 +569,10 @@ function openEventModal(event, index) {
         elements.modalEra.textContent = yearText;
     }
     
-    // Set media with loading spinner
+    // Set media (image from images folder, fallback to icon)
     const imageName = event.title.toLowerCase().replace(/['']/g, "'").replace(/\s+/g, '-');
     const imagePath = `images/${imageName}.png`;
-    
-    elements.modalMedia.innerHTML = `
-        <div class="image-loading-container">
-            <div class="image-spinner"></div>
-            <img src="${imagePath}" alt="${event.title}" style="display: none;" onload="this.style.display='block'; this.previousElementSibling.style.display='none';" onerror="this.parentElement.innerHTML='<span>${event.icon}</span>';">
-        </div>
-    `;
+    elements.modalMedia.innerHTML = `<img src="${imagePath}" alt="${event.title}" onerror="this.parentElement.innerHTML='<span>${event.icon}</span>';">`;
     
     // Set text content
     let textHTML = `
