@@ -27,6 +27,9 @@ function initApp() {
     // Cache DOM elements
     cacheElements();
     
+    // Preload images
+    preloadImages();
+    
     // Initialize map
     initializeMap();
     
@@ -39,112 +42,45 @@ function initApp() {
     // Render initial markers
     renderMarkers();
     
-    // Get progress bar element
-    const progressBar = document.querySelector('.loading-progress');
+    // Hide loading screen after initialization
+    setTimeout(() => {
+        document.getElementById('loading-screen').classList.add('hidden');
+    }, 2500);
     
-    // Preload images with progress tracking
-    preloadImages((progress) => {
-        if (progressBar) {
-            progressBar.style.width = `${progress}%`;
-        }
-    }).then(() => {
-        // Hide loading screen after all images are loaded
-        setTimeout(() => {
-            document.getElementById('loading-screen').classList.add('hidden');
-        }, 500); // Small delay to let user see 100%
-        console.log('Interactive World Map initialized successfully!');
-    });
+    console.log('Interactive World Map initialized successfully!');
 }
 
 /**
  * Preload all images to ensure fast loading
- * @param {Function} onProgress - Callback for progress updates (0-100)
- * @returns {Promise} Resolves when all images are loaded (or failed)
  */
-function preloadImages(onProgress) {
+function preloadImages() {
     console.log('Preloading images...');
-    return new Promise((resolve) => {
-        const imagesToLoad = [];
-        
-        // Preload region images
-        Object.values(regionsData).forEach(region => {
-            const imageName = region.name.toLowerCase().replace(/\s+/g, '-');
-            imagesToLoad.push(`images/${imageName}.png`);
-        });
-        
-        // Preload event images
-        Object.values(historicalEvents).forEach(era => {
-            if (era.events) {
-                era.events.forEach(event => {
-                    // Use same replacement logic as openEventModal
-                    const imageName = event.title.toLowerCase().replace(/['']/g, "'").replace(/\s+/g, '-');
-                    imagesToLoad.push(`images/${imageName}.png`);
-                });
-            }
-        });
-
-        // Add specific event images that might have unique naming or just to be safe
-        // (This list matches what we found in the file structure)
-        const extraImages = [
-            'images/african-independence.png', 'images/age-of-enlightenment.png', 'images/aksumite-empire.png', 
-            'images/american-revolution.png', 'images/athenian-democracy.png', 'images/aztec-empire-peak.png',
-            "images/brazil's-rise.png", 'images/cahokia-mounds.png', 'images/caral-civilization.png',
-            'images/chimú-empire.png', "images/china's-economic-rise.png", 'images/civil-rights-movement.png',
-            'images/colonial-brazil.png', 'images/edo-period-japan.png', 'images/european-union.png',
-            'images/first-european-contact.png', 'images/great-pyramids-of-giza.png', 'images/great-zimbabwe.png',
-            'images/inca-empire.png', 'images/indian-independence.png', 'images/indus-valley-civilization.png',
-            'images/industrial-revolution.png', 'images/islamic-golden-age.png', 'images/italian-renaissance.png',
-            'images/majapahit-empire.png', "images/malaysia's-independence-day.png", 'images/mali-empire.png',
-            'images/maurya-empire.png', 'images/maya-civilization-rise.png', 'images/maya-classic-collapse.png',
-            'images/meiji-restoration.png', 'images/mexican-revolution.png', 'images/mongol-empire.png',
-            'images/mughal-empire.png', 'images/national-apology.png', 'images/nazca-lines-created.png',
-            'images/olmec-civilization.png', 'images/ottoman-empire-peak.png', 'images/rise-of-babylon.png',
-            'images/roman-empire-peak.png', 'images/scramble-for-africa.png', 'images/shang-dynasty-china.png',
-            'images/silk-road-established.png', 'images/south-american-independence.png', 'images/spanish-conquest.png',
-            'images/tang-dynasty-golden-age.png', 'images/teotihuacan-peak.png', 'images/tiwanaku-empire.png'
-        ];
-        
-        // Merge and deduplicate
-        const uniqueImages = [...new Set([...imagesToLoad, ...extraImages])];
-        
-        let loadedCount = 0;
-        const totalImages = uniqueImages.length;
-        
-        console.log(`Starting preload of ${totalImages} unique images.`);
-        
-        if (totalImages === 0) {
-            if (onProgress) onProgress(100);
-            resolve();
-            return;
-        }
-
-        uniqueImages.forEach(src => {
-            const img = new Image();
-            
-            img.onload = () => {
-                loadedCount++;
-                const percent = Math.floor((loadedCount / totalImages) * 100);
-                if (onProgress) onProgress(percent);
-                if (loadedCount === totalImages) {
-                    console.log('All images preloaded.');
-                    resolve();
-                }
-            };
-            
-            img.onerror = () => {
-                console.warn(`Failed to preload image: ${src}`);
-                loadedCount++; // Count errors as "processed" so we don't hang
-                const percent = Math.floor((loadedCount / totalImages) * 100);
-                if (onProgress) onProgress(percent);
-                if (loadedCount === totalImages) {
-                    console.log('All images processed (with some errors).');
-                    resolve();
-                }
-            };
-            
-            img.src = src;
-        });
+    const imagesToLoad = [];
+    
+    // Preload region images
+    Object.values(regionsData).forEach(region => {
+        const imageName = region.name.toLowerCase().replace(/\s+/g, '-');
+        imagesToLoad.push(`images/${imageName}.png`);
     });
+    
+    // Preload event images
+    Object.values(historicalEvents).forEach(era => {
+        if (era.events) {
+            era.events.forEach(event => {
+                // Use same replacement logic as openEventModal
+                const imageName = event.title.toLowerCase().replace(/['']/g, "'").replace(/\s+/g, '-');
+                imagesToLoad.push(`images/${imageName}.png`);
+            });
+        }
+    });
+    
+    // Load images
+    imagesToLoad.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+    
+    console.log(`Started preloading ${imagesToLoad.length} images.`);
 }
 
 /**
