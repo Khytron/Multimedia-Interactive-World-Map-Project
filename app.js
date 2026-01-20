@@ -27,9 +27,6 @@ function initApp() {
     // Cache DOM elements
     cacheElements();
     
-    // Preload images
-    preloadImages();
-    
     // Initialize map
     initializeMap();
     
@@ -48,39 +45,6 @@ function initApp() {
     }, 2500);
     
     console.log('Interactive World Map initialized successfully!');
-}
-
-/**
- * Preload all images to ensure fast loading
- */
-function preloadImages() {
-    console.log('Preloading images...');
-    const imagesToLoad = [];
-    
-    // Preload region images
-    Object.values(regionsData).forEach(region => {
-        const imageName = region.name.toLowerCase().replace(/\s+/g, '-');
-        imagesToLoad.push(`images/${imageName}.png`);
-    });
-    
-    // Preload event images
-    Object.values(historicalEvents).forEach(era => {
-        if (era.events) {
-            era.events.forEach(event => {
-                // Use same replacement logic as openEventModal
-                const imageName = event.title.toLowerCase().replace(/['']/g, "'").replace(/\s+/g, '-');
-                imagesToLoad.push(`images/${imageName}.png`);
-            });
-        }
-    });
-    
-    // Load images
-    imagesToLoad.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
-    
-    console.log(`Started preloading ${imagesToLoad.length} images.`);
 }
 
 /**
